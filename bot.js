@@ -32,18 +32,18 @@ const policialid = '697597599200313436';
     },null,4);
     fs.writeFileSync('suggestions.json', jsonData);
  }
-
-const read = function(){fs.readFile('suggestions.json', 'utf8', (err, data) => {
-    if(err){
-        console.log("File read failed:", err)
-        return
-    }
-    data = JSON.parse(data);
-    currentVote = data.current;
-    votingQueue = data.queue;
+//test
+const read = function(){
+    fs.readFile('suggestions.json', 'utf8', (err, data) => {
+        if(err){
+            console.log("File read failed:", err)
+            return
+        }
+        data = JSON.parse(data);
+        currentVote = data.current;
+        votingQueue = data.queue;
     });
 };
-
 
  var discmembers;
  //console.log(discmembers);
@@ -69,7 +69,6 @@ var USER;
         currentVote.stage = 1;
         //updateJson();
         //var numberofdec = 0;
-        //this for loop apparently doesn't work and IDK why
         //console.log('I work 1');
         for(var i = 0; i < discArray.length; i++){
             //console.log('I work 2');
@@ -90,7 +89,7 @@ var USER;
                         const chosen = reaction.emoji.name;
                         if(chosen === "👍"){
                             sent.channel.send('Thank you for your vote! (Yes)');
-                            //currentVote.voters.push(USER);
+                            currentVote.voters.push(USER);
                             currentVote.total += 1;
                             currentVote.votes[0] += 1;
                             updateJson();
@@ -275,19 +274,67 @@ client.on('message', msg => {
                 var snatch = params.splice(0, 1);
                 //console.log(snatch)
                 //console.log(JSON.stringify(params));
+                for(var i of params){
+                    if(!params[i].startsWith('.')){
+                        params.splice(i, 1);
+                    }
+                }
+                
+                var errors = {
+                    NAP: function(msg){
+                        msg.channel.send(`I don't understand any of your arguments! I understand:\n    .j; Use Japanese.\n    .d; Delete snatch command.`
+                    },
+                    NP: function(msg){
+                        msg.channel.send(`I don't understand any of your arguments! I understand:\n    .j; Use Japanese.\n    .d; Delete snatch command.`
+                    },
+                    CS: function(msg){
+                        msg.channel.send(`This functionality is coming soon! Try me later!`);
+                    }
+                };
                 switch(snatch[0]){
                     case 'benplaylist':
                         msg.channel.send('​r!play https://www.youtube.com/playlist?list=PLShq-al0vKZ2-Oi2RfRNVltc8dPt4xLcI');
                         break;
                     case 'soh':
-                        //msg.channel.send('I hear soh')
-                        if(params.includes('.j')){
-                            //msg.channel.send('I hear .j')
-                            msg.channel.send('我々の頭を揺らす');
+                        if(params.length == 0){
+                            errors.NP(msg);
+                            break;
                         }
+                        // send japanese
+                        if(params.includes('.j')){
+                            msg.channel.send('我々の頭を揺らす');
+                            for(var i of params){
+                                if(params[i] == '.j'){
+                                   params.splice(i, 1);
+                                }
+                            }
+                            if(params.length == 0){
+                                break;  
+                            }
+                        }
+                        // delete message 
+                        if(params.includes('.d')){
+                            msg.delete();
+                            for(var i of params){
+                                if(params[i] == '.d'){
+                                   params.splice(i, 1);
+                                }
+                            }
+                            if(params.length == 0){
+                                break;
+                            }
+                        }
+                        else {
+                            errors.NAP(msg);
+                        }
+                        
                         break;
+                    case 'smh':
+                        errors.CS(msg);
+                        break;
+                    
                     default:
-                        msg.channel.send('Correct parameters include,\n benplaylist, soh.')
+                        msg.channel.send('Invalid request. Some things you can snatch include,\n`benplaylist\`, `soh`,\n and coming soon,\nother people\'s playlists, smh, and more!')
                 }
                 
             }
@@ -320,11 +367,17 @@ client.on('message', msg => {
     if(msg.content.includes('69') && !msg.mentions.members.first()){
         msg.channel.send('ℕ𝕆𝕀ℂ𝔼');
     }
+    if(msg.content.toLowercase().includes('crease') || msg.content.toLowercase().includes('chris')){
+        msg.channel.send('crease bad, WAFFLE GOD');
+    }
     if(msg.content.includes("big brain")){
         msg.channel.send('big bran Raisin Bran with TWO FULL CUPS OF RAISINS\*\*\*\*\*\*');
     }
     if(msg.content.includes("small brain")){
         msg.channel.send('smol bran Normal Bran with NO CUPS OF RAISINS\*\*\*\*\*\*');
+    }
+    if(msg.content.toLowercase().includes('koala')){
+        msg.channel.send('koala = smoooth bran = dumb = crease');
     }
     if(msg.content.includes("I win this battle")){
         msg.channel.send('Are you ***SURE ABOUT THAT***?????');
@@ -335,45 +388,6 @@ client.on('message', msg => {
         mehichat.send(`Mehi said on <#${msg.channel.id}>: \n"${msg.content}"`)
         msg.reply("Hey, you aren't allowed to talk here, go talk in your chat\n( <#713048489633906768> ).")
         msg.delete();
-    }*/
-    /*if(msg.mentions.members.first()){
-        if(msg.mentions.members.first().user.id === "385190937795624960" || "539505577286434816"){
-            client.channels.cache.get("697482382936113262").send("..paninis");
-            client.channels.cache.get("697482382936113262").send("..paninis");
-            client.channels.cache.get("697482382936113262").send("<@539505577286434816>");
-            client.channels.cache.get("697482382936113262").send("<@539505577286434816>");
-            client.channels.cache.get("697482382936113262").send("<@539505577286434816>");
-            client.channels.cache.get("697482382936113262").send("<@539505577286434816>");
-            client.channels.cache.get("697482382936113262").send("<@539505577286434816>");
-            client.channels.cache.get("697482382936113262").send("<@539505577286434816>");
-            client.channels.cache.get("697482382936113262").send("<@539505577286434816>");
-            client.channels.cache.get("697482382936113262").send("<@539505577286434816>");
-            client.channels.cache.get("697482382936113262").send("<@539505577286434816>");
-            client.channels.cache.get("697482382936113262").send("<@539505577286434816>");
-            client.channels.cache.get("697482382936113262").send("<@539505577286434816>");
-            client.channels.cache.get("697482382936113262").send("<@539505577286434816>");
-            client.channels.cache.get("697482382936113262").send("<@539505577286434816>");
-            client.channels.cache.get("697482382936113262").send("<@539505577286434816>");
-            client.channels.cache.get("697482382936113262").send("<@539505577286434816>");
-            client.channels.cache.get("697482382936113262").send("<@539505577286434816>");
-            client.channels.cache.get("697482382936113262").send("<@539505577286434816>");
-            client.channels.cache.get("697482382936113262").send("<@539505577286434816>");
-            client.channels.cache.get("697482382936113262").send("<@539505577286434816>");
-            client.channels.cache.get("697482382936113262").send("<@539505577286434816>");
-            client.channels.cache.get("697482382936113262").send("<@539505577286434816>");
-            client.channels.cache.get("697482382936113262").send("<@539505577286434816>");
-            client.channels.cache.get("697482382936113262").send("<@539505577286434816>");
-            client.channels.cache.get("697482382936113262").send("<@539505577286434816>");
-            client.channels.cache.get("697482382936113262").send("<@539505577286434816>");
-            client.channels.cache.get("697482382936113262").send("<@539505577286434816>");
-            client.channels.cache.get("697482382936113262").send("<@539505577286434816>");
-            client.channels.cache.get("697482382936113262").send("<@539505577286434816>");
-            client.channels.cache.get("697482382936113262").send("<@539505577286434816>");
-            client.channels.cache.get("697482382936113262").send("<@539505577286434816>");
-            client.channels.cache.get("697482382936113262").send("<@539505577286434816>");
-            client.channels.cache.get("697482382936113262").send("<@539505577286434816>");
-            client.channels.cache.get("697482382936113262").send("<@385190937795624960>");
-        }
     }*/
     
 })
