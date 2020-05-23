@@ -19,25 +19,20 @@ client.on('ready', () => {
 client.on('message', msg => {
     // if bot, don't allow
     if(!msg.author.bot){
-        //msg.channel.send('I hear message');
         // if the message starts with the prefix
         if(msg.content.startsWith(package.prefix)){
-            //msg.channel.send('I hear command');
             // remove prefix
             let command = msg.content.split(package.prefix)[1];
             // separate arguments
             let parameters = command.split(" ");
             // differentiate between command type and arguments
             let c = parameters.splice(0, 1)[0];
-            //msg.channel.send(c);
             switch(c){
                 case "help":
                 case "commands":
                 case "wtf":
                     
-                    //msg.channel.send('I hear help');
                     msg.channel.send(embeds.help());
-                    
                     break;
                     
                 case "suggest":
@@ -51,6 +46,7 @@ client.on('message', msg => {
                 case "queue":
                 case "votequeue":
                 case "suggestions":
+                    
                     break;
             }
         }
@@ -67,13 +63,16 @@ client.on('message', msg => {
                     // separate first parameter (to be snatched)
                     let snatch = parameters.splice(0, 1);
                     
+                    
+                    // organize and setup parameters
+                    
                     // remove irrelevant flags
                     parameters.forEach((p, i) => {
                         if(!p.startsWith('.')){
                             parameters.splice(i, 1);
                         }
                     });
-                    console.log(parameters);
+                    
                     // japanese, spanish
                     var nec = [".j", ".s"];
                     // delete, DM
@@ -82,18 +81,20 @@ client.on('message', msg => {
                     // amounts of necessary and optional parameters
                     var amount = [0, 0];
                     // counts each type
-                    for(var i of parameters){
-                        if(nec.includes(parameters[i])){
+                    
+                    parameters.forEach(p => {
+                        if(nec.includes(p)){
                             amount[0] += 1;
                             if(amount[0] > 1){
                                 errors.TMP(msg);
                                 break;
                             }
                         }
-                        else if(opt.includes(parameters[i])){
-                            amount[1]++;
+                        if(opt.includes(p)){
+                            amount[1] += 1;
                         }
-                    }
+                    });
+                    
                     if(amount[0] < 1){
                         errors.NP(msg);
                         break;
@@ -115,7 +116,6 @@ var functions = {
         switch(tbs){
                 
             case soh:
-                
                 // Japanese
                 if(parameters.includes('.j')){
                     // DM
@@ -194,7 +194,7 @@ const errors = {
         msg.channel.send(`I don't understand any of your arguments! I understand:\n    .j; Use Japanese.\n    .d; Delete snatch command.`);
     },
     NP: function(msg){
-        msg.channel.send(`You don't have acceptable arguments! I need only one of these:\n    .j; Use Japanese.\nAnd these are optional:\n    .d; Delete snatch command.\nThese are coming soon:\n    none`);
+        msg.channel.send(`You don't have acceptable arguments! I need only one of these:\n    .j; Use Japanese.\n    .s; Use Spanish\nAnd these are optional:\n    .d; Delete snatch command.\n    .D; DM the result.\nThese are coming soon:\n    none`);
     },
     CS: function(msg){
         msg.channel.send(`This functionality is coming soon! Try me later!`);
