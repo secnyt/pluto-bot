@@ -10,5 +10,10 @@
             "*.json"
         ]
     },
-    "prefix": "="
+    "prefix": "=",
+    "name": "pluto",
+    "version": "1.0.0",
+    "description": "A Messenger Bot for Parliament",
+    "main": "bot.js",
+    "author": "Secnyt"
 }
