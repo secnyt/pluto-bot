@@ -36,7 +36,7 @@ client.on('message', msg => {
                 case "wtf":
                     
                     //msg.channel.send('I hear help');
-                    msg.channel.send(embeds.help);
+                    msg.channel.send(embeds.help());
                     
                     break;
                     
@@ -48,18 +48,32 @@ client.on('message', msg => {
                     
                     break;
                     
+                case "queue":
+                case "votequeue":
+                case "suggestions":
+                    break;
+            }
+        }
+        if(msg.content.startsWith('/')){
+            let command = msg.content.split('/')[1];
+            //console.log(command);
+            let parameters = command.split(" ");
+            //console.log(parameters);
+            let c = parameters.splice(0, 1)[0];
+            //console.log(c);
+            switch(c){
                 case "s":
                     
                     // separate first parameter (to be snatched)
                     let snatch = parameters.splice(0, 1);
                     
                     // remove irrelevant flags
-                    for(var i of parameters){
-                        if(!parameters[i].startsWith('.')){
+                    parameters.forEach((p, i) => {
+                        if(!p.startsWith('.')){
                             parameters.splice(i, 1);
                         }
-                    }
-                    
+                    });
+                    console.log(parameters);
                     // japanese, spanish
                     var nec = [".j", ".s"];
                     // delete, DM
@@ -70,7 +84,7 @@ client.on('message', msg => {
                     // counts each type
                     for(var i of parameters){
                         if(nec.includes(parameters[i])){
-                            amount[0]++;
+                            amount[0] += 1;
                             if(amount[0] > 1){
                                 errors.TMP(msg);
                                 break;
@@ -85,12 +99,10 @@ client.on('message', msg => {
                         break;
                     }
                     
+                    functions.snatch(msg, snatch, parameters);
+
                     break;
                     
-                case "queue":
-                case "votequeue":
-                case "suggestions":
-                    break;
             }
         }
     }
@@ -107,7 +119,7 @@ var functions = {
                 // Japanese
                 if(parameters.includes('.j')){
                     // DM
-                    if(parameters.includes('.D'){
+                    if(parameters.includes('.D')){
                         // DM user
                         client.users.cache.get(msg.author.id).send('我々の頭を揺らす');
                     }
@@ -116,7 +128,7 @@ var functions = {
                     }
                 }
                 // delete
-                if(parameters.includes('.d'){
+                if(parameters.includes('.d')){
                    msg.delete();
                 }
                 break;
@@ -130,7 +142,7 @@ var functions = {
             case secnytplaylist:
 
                 // DM
-                if(parameters.includes('.D'){
+                if(parameters.includes('.D')){
                    // DM user
                    client.users.cache.get(msg.author.id).send('r!play https://www.youtube.com/playlist?list=PLShq-al0vKZ2-Oi2RfRNVltc8dPt4xLcI');
                 }
@@ -138,7 +150,7 @@ var functions = {
                     msg.channel.send('https://www.youtube.com/playlist?list=PLShq-al0vKZ2-Oi2RfRNVltc8dPt4xLcI');
                 }
                 // delete
-                if(parameters.includes('.d'){
+                if(parameters.includes('.d')){
                    msg.delete();
                 }
                 break;
@@ -161,14 +173,15 @@ const embeds = {
             .setURL('https://github.com/secnyt/pluto-bot')
             .setAuthor('@Secnyt#7070', plutoImage, 'https://github.com/secnyt')
             .setDescription('Pluto Help Page')
-            .setThumnail(plutoImage)
+            .setThumbnail(plutoImage)
             .addFields(
-                { name: `${package.prefix}help, ${package.prefix}commands`, value: `Brings up this menu.\nUsage: ${package.prefix}help` },
                 { name: '\u200B', value: '\u200B' },
-                { name: `${package.prefix}suggest`, value: `Make a suggestion.\nUsage: ${package.prefix}suggest <suggestion>`, inline: true },
-                { name: `${package.prefix}queue, ${package.prefix}suggestions`, value: `Shows suggestion queue for the server.\nUsage: ${package.prefix}suggestions`, inline: true },
+                { name: `${package.prefix}help, ${package.prefix}commands`, value: `Brings up this menu.\n\`Usage: ${package.prefix}help\`` },
+                { name: '\u200B', value: '\u200B' },
+                { name: `${package.prefix}suggest`, value: `Make a suggestion.\n\nUsage: \`${package.prefix}suggest <suggestion>\``, inline: true },
+                { name: `${package.prefix}queue, ${package.prefix}suggestions`, value: `Shows suggestion queue for the server.\n\`Usage: ${package.prefix}suggestions\``, inline: true },
             )
-            .setImage(plutoImage)
+            //.setImage(plutoImage)
             .setTimestamp()
             .setFooter('Pluto Help Page · Created by Secnyt');
         return embed
@@ -185,7 +198,7 @@ const errors = {
     },
     CS: function(msg){
         msg.channel.send(`This functionality is coming soon! Try me later!`);
-    }
+    },
     TMP: function(msg){
         msg.channel.send(`You have too many necessary flags! You need one, and only one.`);
     }
