@@ -1,5 +1,4 @@
 {
-    "token": "Njk3NTY5MDY3MjQxODMyNjUy.Xo5Qvg.aD1WHQql2PYrNJiG-By99mN5OYQ",
     "dependencies": {
         "discord.io": "https://github.com/woor/discord.io/tarball/gateway_v6",
         "discord.js": "^12.2.0",
