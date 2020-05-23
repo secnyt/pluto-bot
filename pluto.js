@@ -1,19 +1,21 @@
 // file system
 const fs = require('fs');
 const package = require('./package.json');
+const auth = require('./auth.json');
 
 // discord.js setup
 const Discord = require('discord.js');
 const client = new Discord.Client();
 
 // login
-client.login(package.token);
+client.login(auth.token);
 
 // startup
 client.on('ready', () => {
     console.log(`Logged in as ${client.user.tag}.`);
 });
 
+// on message
 client.on('message', msg => {
     // if bot, don't allow
     if(!msg.author.bot){
