@@ -1,10 +1,9 @@
-// discord.js setup
-const Discord = require('discord.js');
-
 // Importing
 const package = require('../package.json');
 const stuff = require('../pluto.js');
-const snh = require('./snatchHandling.js')
+const snh = require('./commands/snatchHandler.js');
+const embeds = require('../storage/constants/embeds.js');
+const hh = require('./commands/helpHandler.js');
 
 var ch = {};
 
@@ -19,8 +18,7 @@ ch.handleP = function(msg, client){
         case "help":
         case "commands":
         case "wtf":
-            
-            msg.channel.send(stuff.e.help());
+            hh.handle(msg, client, parameters);
             break;
             
         case "suggest":

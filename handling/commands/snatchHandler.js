@@ -1,5 +1,5 @@
-const stuff = require('../pluto.js');
-const package = require('../package.json');
+const stuff = require('./../../pluto.js');
+const package = require('./../../package.json');
 
 var snh = {}
 

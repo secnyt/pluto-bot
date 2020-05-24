@@ -2,9 +2,11 @@
 
 The `snatch` commands is a quick and easy way to get copypastas. 
 
+Usage: `/s`
+
 Each server has its own snatches, each with their own keywords.
 
-(<> signify mandatory parameters, [] signify optional parameters.)
+(<> signifies mandatory parameters, [] signifies optional parameters.)
 
 Create a snatch with
 `/s create <keyword> <value>: [flags]`

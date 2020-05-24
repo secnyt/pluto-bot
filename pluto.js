@@ -13,6 +13,9 @@ var ch;
 //var snatch;
 //var sh;
 
+// js storage
+var embeds;
+
 // discord.js setup
 const Discord = require('discord.js');
 const client = new Discord.Client();
@@ -30,10 +33,13 @@ client.on('ready', () => {
     auth = require('./auth.json');
 
     // external js
-    ch = require('./handling/commandHandling.js');
-    snh = require('./handling/snatchHandling.js');
+    ch = require('./handling/commandHandler');
+    snh = require('./handling/commands/snatchHandler.js');
     //snatch = require('./snatch.js');
     //sh = require('./suggestionHandling.js');
+
+    // js storage
+    embeds = require('./storage/constants/embeds.js')
 });
 
 // on message
@@ -53,33 +59,6 @@ client.on('message', msg => {
 
 
 
-
-// aesthetics
-const plutoImage = 'https://cdn.discordapp.com/attachments/710653500669034607/713585355592564797/697_nh-pluto-charon-v2-10-1-15_1600.jpg';
-// embeds
-const embeds = {
-    help: function(){
-        let embed = new Discord.MessageEmbed()
-            .setColor('#a62121')
-            .setTitle('Pluto Help Page')
-            .setURL('https://github.com/secnyt/pluto-bot')
-            .setAuthor('Secnyt (@Secnyt#7070)', plutoImage, 'https://github.com/secnyt')
-            .setDescription('Pluto Help Page')
-            .setThumbnail(plutoImage)
-            .addFields(
-                { name: '\u200B', value: '\u200B' },
-                { name: `${package.prefix}help, ${package.prefix}commands`, value: `Brings up this menu.\n\`Usage: ${package.prefix}help\`` },
-                { name: '\u200B', value: '\u200B' },
-                { name: `${package.prefix}suggest`, value: `Make a suggestion.\n\nUsage: \`${package.prefix}suggest <suggestion>\``, inline: true },
-                { name: `${package.prefix}queue, ${package.prefix}suggestions`, value: `Shows suggestion queue for the server.\n\`Usage: ${package.prefix}suggestions\``, inline: true },
-            )
-            //.setImage(plutoImage)
-            .setTimestamp()
-            .setFooter('Pluto Help Page · Created by Secnyt');
-        return embed
-    }
-};
-
 // custom error messages
 const errors = {
     NAP: function(msg){
@@ -97,7 +76,6 @@ const errors = {
 };
 
 var stuff = {
-    e: embeds,
     er: errors
 };
 
