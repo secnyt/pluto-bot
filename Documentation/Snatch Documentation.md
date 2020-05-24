@@ -28,6 +28,7 @@ Usage:
 Example output:
 > `Hi, how are you?`
 
+
 > `.D`
 
 DM the value to the user.
@@ -39,6 +40,7 @@ Usage:
 
 Example output:
 > `Hi, how are you?`
+
 
 
 Creating flags include
@@ -53,6 +55,7 @@ Usage:
 Expected output:
 > `Created snatch "hi" with value "Hi, how are you?" for Administrators.`
 
+
 > `.o`
 
 Overrides a snatch with the same name (if a snatch has the same name).
@@ -62,6 +65,7 @@ Usage:
 
 Expected output:
 > `Overwrote snatch "hi" with value "Hi, how are you?".`
+
 
 > `.c`
 
@@ -73,6 +77,7 @@ Usage:
 Expected output:
 > Snatch "hi" was not created since a snatch with name "hi" already exists.
 
+
 > `.w`
 
 Makes the created flag only usable by the owner of the server. (only useable by the owner of the server)
@@ -82,6 +87,7 @@ Usage:
 
 Expected output:
 > `Created snatch "hi" with value "Hi, how are you?" for Administrators.`
+
 
 
 ## Permissions ##
