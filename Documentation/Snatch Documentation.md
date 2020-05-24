@@ -14,6 +14,8 @@ Get a snatch with
 
 ## Flags ##
 
+### Flags on Snatching
+
 Snatching flags include
 
 >  `.d`
@@ -42,7 +44,7 @@ Usage:
 Example output:
 > `Hi, how are you?`
 
-
+### Flags on Creation of Snatches
 
 Creating flags include
 
