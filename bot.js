@@ -16,7 +16,8 @@
     'protocol': '697485262221082744',
 }
 
- client.login(package.token);
+ //client.login(package.token);
+ console.log(`Please don't use this! It isn't functional. Please see and use pluto.js. This is an old file.`)
 
  var currentVote;
  var votingQueue;
