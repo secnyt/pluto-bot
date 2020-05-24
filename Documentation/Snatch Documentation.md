@@ -16,52 +16,72 @@ Get a snatch with
 
 Snatching flags include
 
-> `.d`
-\nDelete the command request.
-\nUsage:\n
-> `/s hello .d`
-\n*Deletes previous message*
-\nExample output:\n
-> Hi, how are you?
+>  `.d`
 
-> .D
-DM the value to the user.
+Delete the command request.
+
 Usage:
-> /s hello .D
-*DMs to user*
+> `/s hello .d`
+
+*Deletes previous message*
+
 Example output:
-> Hi, how are you?
+> `Hi, how are you?`
+
+> `.D`
+
+DM the value to the user.
+
+Usage:
+> `/s hello .D`
+
+*DMs to user*
+
+Example output:
+> `Hi, how are you?`
 
 
 Creating flags include
 
-> .a
+> `.a`
+
 Makes the created flag only usable by those with admin permissions. (only useable by administrators)
-Usage:
-> /s create hi Hi, how are you?: .a
-Expected output:
-> Created snatch "hi" with value "Hi, how are you?" for Administrators.
 
-> .o
+Usage:
+> `/s create hi Hi, how are you?: .a`
+
+Expected output:
+> `Created snatch "hi" with value "Hi, how are you?" for Administrators.`
+
+> `.o`
+
 Overrides a snatch with the same name (if a snatch has the same name).
-Usage:
-> /s create hi Hi, how are you?: .o
-Expected output:
-> Overwrote snatch "hi" with value "Hi, how are you?".
 
-> .c
-Cancels creation of snatch (if a snatch has the same name).
 Usage:
-> /s create hi Hi, how are you?: .c
+> `/s create hi Hi, how are you?: .o`
+
+Expected output:
+> `Overwrote snatch "hi" with value "Hi, how are you?".`
+
+> `.c`
+
+Cancels creation of snatch (if a snatch has the same name).
+
+Usage:
+> `/s create hi Hi, how are you?: .c`
+
 Expected output:
 > Snatch "hi" was not created since a snatch with name "hi" already exists.
 
-> .w
+> `.w`
+
 Makes the created flag only usable by the owner of the server. (only useable by the owner of the server)
+
 Usage:
-> /s create hi Hi, how are you?: .a
+> `/s create hi Hi, how are you?: .w`
+
 Expected output:
-> Created snatch "hi" with value "Hi, how are you?" for Administrators.
+> `Created snatch "hi" with value "Hi, how are you?" for Administrators.`
 
 
 ## Permissions ##
