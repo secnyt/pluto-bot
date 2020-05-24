@@ -16,12 +16,12 @@ Get a snatch with
 
 Snatching flags include
 
-> .d
-Delete the command request.
-Usage:
-> /s hello .d
-*Deletes previous message*
-Example output:
+> `.d`
+\nDelete the command request.
+\nUsage:\n
+> `/s hello .d`
+\n*Deletes previous message*
+\nExample output:\n
 > Hi, how are you?
 
 > .D
