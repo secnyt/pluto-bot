@@ -1,7 +1,17 @@
 // file system
-const fs = require('fs');
-const package = require('./package.json');
-const auth = require('./auth.json');
+var fs = require('fs');
+
+// JSONs
+var auth = require('./auth.json');
+var package = require('./package.json');
+
+//var suggests;
+//embedsNErrors = require('./embeds.json');
+
+// external js
+var ch;
+//var snatch;
+//var sh;
 
 // discord.js setup
 const Discord = require('discord.js');
@@ -13,6 +23,17 @@ client.login(auth.token);
 // startup
 client.on('ready', () => {
     console.log(`Logged in as ${client.user.tag}.`);
+
+    // file system
+    fs = require('fs');
+    package = require('./package.json');
+    auth = require('./auth.json');
+
+    // external js
+    ch = require('./handling/commandHandling.js');
+    snh = require('./handling/snatchHandling.js');
+    //snatch = require('./snatch.js');
+    //sh = require('./suggestionHandling.js');
 });
 
 // on message
@@ -21,170 +42,14 @@ client.on('message', msg => {
     if(!msg.author.bot){
         // if the message starts with the prefix
         if(msg.content.startsWith(package.prefix)){
-            // remove prefix
-            let command = msg.content.split(package.prefix)[1];
-            // separate arguments
-            let parameters = command.split(" ");
-            // differentiate between command type and arguments
-            let c = parameters.splice(0, 1)[0];
-            switch(c){
-                case "help":
-                case "commands":
-                case "wtf":
-                    
-                    msg.channel.send(embeds.help());
-                    break;
-                    
-                case "suggest":
-                    
-                    break;
-                    
-                case "init":
-                    
-                    break;
-                    
-                case "queue":
-                case "votequeue":
-                case "suggestions":
-                    
-                    break;
-            }
+            ch.handleP(msg, client);
+            
         }
-        if(msg.content.startsWith('/')){
-            let command = msg.content.split('/')[1];
-            //console.log(command);
-            let parameters = command.split(" ");
-            //console.log(parameters);
-            let c = parameters.splice(0, 1)[0];
-            //console.log(c);
-            switch(c){
-                case "s":
-                    var toBreak = false;
-                    // separate first parameter (to be snatched)
-                    let snatch = parameters.splice(0, 1)[0];
-                    
-                    
-                    // organize and setup parameters
-                    
-                    // remove irrelevant flags
-                    parameters.forEach((p, i) => {
-                        if(!p.startsWith('.')){
-                            parameters.splice(i, 1);
-                        }
-                    });
-                    
-                    // japanese, spanish
-                    var nec = [".j", ".s"];
-                    // delete, DM
-                    var opt = [".d", ".D"];
-                    
-                    // amounts of necessary and optional parameters
-                    var amount = [0, 0];
-                    // counts each type
-                    
-                    parameters.forEach(p => {
-                        if(nec.includes(p)){
-                            amount[0] += 1;
-                            if(amount[0] > 1){
-                                errors.TMP(msg);
-                                toBreak = true;
-                            }
-                        }
-                        if(opt.includes(p)){
-                            amount[1] += 1;
-                        }
-                    });
-                    if(toBreak){
-                        break;
-                    }
-                    if(amount[0] < 1){
-                        errors.NP(msg);
-                        break;
-                    }
-                    functions.snatch(msg, snatch, parameters);
-
-                    break;
-                    
-            }
+        if(msg.content.startsWith("/")){
+            ch.handleS(msg, client);
         }
     }
 });
-
-// list of functions for organization
-var functions = {
-    // snatch function
-    snatch: function(msg, tbs, parameters){
-        console.log(tbs);
-        // returns "soh"
-        switch(tbs){ 
-            case "soh":
-                // Japanese
-                if(parameters.includes('.j')){
-                    // DM
-                    if(parameters.includes('.D')){
-                        // DM user
-                        client.users.cache.get(msg.author.id).send('我々の頭を揺らす');
-                    }
-                    else {
-                        msg.channel.send('我々の頭を揺らす');
-                    }
-                }
-                // delete
-                if(parameters.includes('.d')){
-                   msg.delete();
-                }
-                break;
-    
-            case "smh":
-    
-                // coming soon
-                errors.CS(msg);
-                break;
-
-            case "secnytplaylist":
-
-                // DM
-                if(parameters.includes('.D')){
-                   // DM user
-                   client.users.cache.get(msg.author.id).send('r!play https://www.youtube.com/playlist?list=PLShq-al0vKZ2-Oi2RfRNVltc8dPt4xLcI');
-                }
-                else {
-                    msg.channel.send('https://www.youtube.com/playlist?list=PLShq-al0vKZ2-Oi2RfRNVltc8dPt4xLcI');
-                }
-                // delete
-                if(parameters.includes('.d')){
-                   msg.delete();
-                }
-                break;
-
-            default:
-                msg.channel.send('No comprendo.')
-                break;
-        }
-    }
-};
-
-// suggestions, queue, etc.
-
-var suggestions = {
-    current: {},
-    queue: {},
-};
-
-class Suggestion{
-    constructor(c, u, g, i){
-        this.suggestion = {
-            c: c,
-            i: i
-        };
-        this.classification = {
-            guild: g,
-            user: u
-        };
-    }
-};
-
-
 
 
 
@@ -230,3 +95,10 @@ const errors = {
         msg.channel.send(`You have too many necessary flags! You need one, and only one.`);
     }
 };
+
+var stuff = {
+    e: embeds,
+    er: errors
+};
+
+module.exports = stuff;
