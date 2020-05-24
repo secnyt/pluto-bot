@@ -2,7 +2,7 @@
     "dependencies": {
         "discord.io": "https://github.com/woor/discord.io/tarball/gateway_v6",
         "discord.js": "^12.2.0",
-        "nodemon": "^2.0.3",
+        "nodemon": "^2.0.4",
         "winston": "^3.2.1"
     },
     "nodemonConfig": {

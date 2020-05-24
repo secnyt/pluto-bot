@@ -59,9 +59,9 @@ client.on('message', msg => {
             //console.log(c);
             switch(c){
                 case "s":
-                    
+                    var toBreak = false;
                     // separate first parameter (to be snatched)
-                    let snatch = parameters.splice(0, 1);
+                    let snatch = parameters.splice(0, 1)[0];
                     
                     
                     // organize and setup parameters
@@ -87,19 +87,20 @@ client.on('message', msg => {
                             amount[0] += 1;
                             if(amount[0] > 1){
                                 errors.TMP(msg);
-                                break;
+                                toBreak = true;
                             }
                         }
                         if(opt.includes(p)){
                             amount[1] += 1;
                         }
                     });
-                    
+                    if(toBreak){
+                        break;
+                    }
                     if(amount[0] < 1){
                         errors.NP(msg);
                         break;
                     }
-                    
                     functions.snatch(msg, snatch, parameters);
 
                     break;
@@ -113,9 +114,10 @@ client.on('message', msg => {
 var functions = {
     // snatch function
     snatch: function(msg, tbs, parameters){
-        switch(tbs){
-                
-            case soh:
+        console.log(tbs);
+        // returns "soh"
+        switch(tbs){ 
+            case "soh":
                 // Japanese
                 if(parameters.includes('.j')){
                     // DM
@@ -133,13 +135,13 @@ var functions = {
                 }
                 break;
     
-            case smh:
+            case "smh":
     
                 // coming soon
                 errors.CS(msg);
                 break;
 
-            case secnytplaylist:
+            case "secnytplaylist":
 
                 // DM
                 if(parameters.includes('.D')){
@@ -156,10 +158,35 @@ var functions = {
                 break;
 
             default:
+                msg.channel.send('No comprendo.')
                 break;
         }
     }
 };
+
+// suggestions, queue, etc.
+
+var suggestions = {
+    current: {},
+    queue: {},
+};
+
+class Suggestion{
+    constructor(c, u, g, i){
+        this.suggestion = {
+            c: c,
+            i: i
+        };
+        this.classification = {
+            guild: g,
+            user: u
+        };
+    }
+};
+
+
+
+
 
 
 // aesthetics
@@ -171,7 +198,7 @@ const embeds = {
             .setColor('#a62121')
             .setTitle('Pluto Help Page')
             .setURL('https://github.com/secnyt/pluto-bot')
-            .setAuthor('@Secnyt#7070', plutoImage, 'https://github.com/secnyt')
+            .setAuthor('Secnyt (@Secnyt#7070)', plutoImage, 'https://github.com/secnyt')
             .setDescription('Pluto Help Page')
             .setThumbnail(plutoImage)
             .addFields(
@@ -191,10 +218,10 @@ const embeds = {
 // custom error messages
 const errors = {
     NAP: function(msg){
-        msg.channel.send(`I don't understand any of your arguments! I understand:\n    .j; Use Japanese.\n    .d; Delete snatch command.`);
+        msg.channel.send(`I don't understand any of your arguments!`);
     },
     NP: function(msg){
-        msg.channel.send(`You don't have acceptable arguments! I need only one of these:\n    .j; Use Japanese.\n    .s; Use Spanish\nAnd these are optional:\n    .d; Delete snatch command.\n    .D; DM the result.\nThese are coming soon:\n    none`);
+        msg.channel.send(`You don't have acceptable arguments!`);
     },
     CS: function(msg){
         msg.channel.send(`This functionality is coming soon! Try me later!`);
