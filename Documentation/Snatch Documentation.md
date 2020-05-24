@@ -2,7 +2,7 @@
 
 The `snatch` commands is a quick and easy way to get copypastas. 
 
-Each server has its own snatchers, each with their own keywords.
+Each server has its own snatches, each with their own keywords.
 
 (<> signify mandatory parameters, [] signify optional parameters.)
 
@@ -27,6 +27,7 @@ Usage:
 
 Example output:
 > `Hi, how are you?`
+
 
 
 > `.D`
@@ -56,6 +57,7 @@ Expected output:
 > `Created snatch "hi" with value "Hi, how are you?" for Administrators.`
 
 
+
 > `.o`
 
 Overrides a snatch with the same name (if a snatch has the same name).
@@ -67,6 +69,7 @@ Expected output:
 > `Overwrote snatch "hi" with value "Hi, how are you?".`
 
 
+
 > `.c`
 
 Cancels creation of snatch (if a snatch has the same name).
@@ -76,6 +79,7 @@ Usage:
 
 Expected output:
 > Snatch "hi" was not created since a snatch with name "hi" already exists.
+
 
 
 > `.w`
