@@ -4,6 +4,7 @@ const snh = require('./commands/snatchHandler.js');
 const embeds = require('../storage/constants/embeds.js');
 const hh = require('./commands/helpHandler.js');
 const sgh = require('./commands/suggestHandler.js');
+const qh = require('./commands/queueHandler.js');
 
 var ch = {};
 
@@ -25,14 +26,16 @@ ch.handleP = function(msg, client){
             sgh.handle(msg, client);
             break;
             
-        case "init":
+        case "initvote":
+        case "startvote":
+        case "nextvote":
             
             break;
             
         case "queue":
         case "votequeue":
         case "suggestions":
-            
+            qh.handle(msg, client);
             break;
     }
 }

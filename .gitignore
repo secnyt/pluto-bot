@@ -106,5 +106,8 @@ dist
 # TernJS port file
 .tern-port
 
-# Authorization file
+# Stuff I don't need on the internet
 /auth.json
+/storage/suggestions
+/storage/snatches
+/storage/images
