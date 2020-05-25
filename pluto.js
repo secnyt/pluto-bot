@@ -10,6 +10,7 @@ var package = require('./package.json');
 
 // external js
 var ch;
+var c;
 //var snatch;
 //var sh;
 
@@ -35,6 +36,7 @@ client.on('ready', () => {
     // external js
     ch = require('./handling/commandHandler');
     snh = require('./handling/commands/snatchHandler.js');
+    c = require('./captcha/captcha.js');
     //snatch = require('./snatch.js');
     //sh = require('./suggestionHandling.js');
 
@@ -44,6 +46,7 @@ client.on('ready', () => {
 
 // on message
 client.on('message', msg => {
+    //c.test(msg, client);
     // if bot, don't allow
     if(!msg.author.bot){
         // if the message starts with the prefix
