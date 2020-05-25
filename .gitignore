@@ -108,6 +108,6 @@ dist
 
 # Stuff I don't need on the internet
 /auth.json
-/storage/suggestions
+/storage/suggestions/suggestions.json
 /storage/snatches
 /storage/images
