@@ -5,13 +5,14 @@ const package = require('./../../package.json');
 e = {};
 
 const plutoImage = 'https://cdn.discordapp.com/attachments/710653500669034607/713585355592564797/697_nh-pluto-charon-v2-10-1-15_1600.jpg';
+const secnytImage = 'https://cdn.discordapp.com/avatars/539505577286434816/bd289c17a1dff59e88df42b73bde2c22.webp';
 
 e.help = function(){
     let embed = new Discord.MessageEmbed()
         .setColor('#a62121')
         .setTitle('Pluto Help Page')
         .setURL('https://github.com/secnyt/pluto-bot')
-        .setAuthor('Secnyt (@Secnyt#7070)', plutoImage, 'https://github.com/secnyt')
+        .setAuthor('Secnyt (@Secnyt#7070)', secnytImage, 'https://github.com/secnyt')
         .setDescription('Pluto Help Page')
         .setThumbnail(plutoImage)
         .addFields(
@@ -23,7 +24,7 @@ e.help = function(){
         )
         //.setImage(plutoImage)
         .setTimestamp()
-        .setFooter('Pluto Help Page · Created by Secnyt');
+        .setFooter('Pluto Help Page · Created by Secnyt', secnytImage);
     return embed
 }
 

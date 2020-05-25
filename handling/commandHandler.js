@@ -1,9 +1,9 @@
 // Importing
 const package = require('../package.json');
-const stuff = require('../pluto.js');
 const snh = require('./commands/snatchHandler.js');
 const embeds = require('../storage/constants/embeds.js');
 const hh = require('./commands/helpHandler.js');
+const sgh = require('./commands/suggestHandler.js');
 
 var ch = {};
 
@@ -22,7 +22,7 @@ ch.handleP = function(msg, client){
             break;
             
         case "suggest":
-            
+            sgh.handle(msg, client);
             break;
             
         case "init":

@@ -3,11 +3,19 @@ const package = require('./../../package.json');
 
 var snh = {}
 
-snh.handleSnatch1 = function(msg, tbs, parameters, client){
-    console.log(tbs);
+snh.handleSnatch1 = function(msg, tbs, parameters, client, data){
+    //console.log(tbs);
     // returns "soh"
     switch(tbs){ 
         case "soh":
+            if(data.hasTMNec){
+                stuff.er.TMP(msg);
+                break;
+            }
+            if(!data.hasNec){
+                stuff.er.NP(msg);
+                break;
+            }
             // Japanese
             if(parameters.includes('.j')){
                 // DM
@@ -46,6 +54,27 @@ snh.handleSnatch1 = function(msg, tbs, parameters, client){
                msg.delete();
             }
             break;
+        
+        case "icon":
+
+            // DM
+            if(parameters.includes('.D')){
+                // DM user
+                client.users.cache.get(msg.author.id).send(client.users.cache.get(msg.author.id).avatarURL());
+            }
+            else {
+                //console.log(msg);
+                try{
+                    msg.channel.send(client.users.cache.get(msg.author.id).avatarURL());
+                }catch(err){
+                    throw err;
+                }
+            }
+            // delete
+            if(parameters.includes('.d')){
+                msg.delete();
+            }
+            break;
 
         default:
             msg.channel.send('No comprendo.')
@@ -61,6 +90,11 @@ snh.handle = function(msg, client){
     switch(c){
         case "s":
             var toBreak = false;
+
+            var errs = {
+                hasTMNec: false,
+                hasNec: true
+            };
             // separate first parameter (to be snatched)
             let snatch = parameters.splice(0, 1)[0];
             let create = false;
@@ -89,8 +123,9 @@ snh.handle = function(msg, client){
                     if(nec.includes(p)){
                         amount[0] += 1;
                         if(amount[0] > 1){
-                            stuff.er.TMP(msg);
-                            toBreak = true;
+                            //stuff.er.TMP(msg);
+                            //toBreak = true;
+                            errs.hasTMNec = true;
                         }
                     }
                     if(opt.includes(p)){
@@ -101,10 +136,11 @@ snh.handle = function(msg, client){
                     break;
                 }
                 if(amount[0] < 1){
-                    stuff.er.NP(msg);
-                    break;
+                    //stuff.er.NP(msg);
+                    //break;
+                    errs.hasNec = false;
                 }
-                snh.handleSnatch1(msg, snatch, parameters, client);
+                snh.handleSnatch1(msg, snatch, parameters, client, errs);
 
                 break;
             }
