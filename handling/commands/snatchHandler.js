@@ -100,10 +100,10 @@ snh.handleSnatch1 = function(msg, tbs, parameters, client, data){
 
 snh.handle = function(msg, client){
     allSnatches = JSON.parse(fs.readFileSync('./storage/snatches/snatches.json'));
-    console.log(allSnatches);
+    //console.log(allSnatches);
     var gid = msg.guild.id;
     var gsn = allSnatches[gid];
-    console.log(gsn);
+    //console.log(gsn);
     let command = msg.content.split('/')[1];
     let parameters = command.split(" ");
     let c = parameters.splice(0, 1)[0];
@@ -145,8 +145,8 @@ snh.handle = function(msg, client){
                 console.log(Object.keys(gsn));
                 console.log(snatch);
                 if(Object.keys(gsn).includes(snatch)){
-                    console.log('yay');
-                    msg.channel.send(gsn[snatch].value);
+                    //console.log('yay');
+                    msg.channel.send(gsn[snatch].val);
                 }
             }
             else if(create == true){
@@ -161,36 +161,35 @@ snh.handle = function(msg, client){
 
                 let flags = [];
 
-                for(var i of parameters){
+                parameters.forEach((p, i) => {
                     console.log('I');
                     let newi = i + 1;
                     var w = parameters[i];
                     var wArray;
-                    if(i < parameters.length){
+                    if(i){
                         console.log('work');
-                        wArray = w.split('');
+                        wArray = p.split('');
                         if(!d){
                             console.log(d);
-                            if(!wArray[wArray.length - 1] == ":"){
-                                console.log('!:');
-                                value += w;
-                            }
-                            else if(wArray[wArray.length - 1] == ":"){
+                            if(wArray[wArray.length - 1] == ":"){
                                 console.log(':');
                                 d = true;
                                 wArray.splice((wArray.length - 1), 1);
                                 var newW = ''
                                 wArray.forEach(word => {
-                                    newW += (word + ' ');
+                                    newW += (word);
                                 })
-                                value += newW;
+                                value += (newW + ' ');
+                            } else {
+                                console.log('!:');
+                                value += (p + ' ');
                             }
                         }
                         else {
                             flags.push(w);
                         }
                     }
-                }
+                });
 
                 var perms = [];
                 var onDup = 'a';
@@ -225,6 +224,7 @@ snh.handle = function(msg, client){
                 if(gsn[newSnatch.key]){
                     switch(onDup){
                         case 'a':
+                            console.log('abc' + gsn[newSnatch.key])
                             if(gsn[newSnatch.key]){
                                 msg.channel.send('This key is already in use, or it is reserved.\nYou didn\'t specify an option in case of this happening, so by default, the creation is canceled.');
                                 toPush = false;
@@ -246,6 +246,7 @@ snh.handle = function(msg, client){
                 allSnatches[gid] = gsn;
 
                 write(allSnatches);
+                msg.channel.send(`Your snatch has been created!`);
             }
     }
 }
