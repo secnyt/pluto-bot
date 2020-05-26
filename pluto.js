@@ -11,6 +11,7 @@ var package = require('./package.json');
 // external js
 var ch;
 var c;
+var pt;
 //var snatch;
 //var sh;
 
@@ -37,6 +38,7 @@ client.on('ready', () => {
     ch = require('./handling/commandHandler');
     snh = require('./handling/commands/snatchHandler.js');
     c = require('./captcha/captcha.js');
+    pt = require('./misc/piTime.js');
     //snatch = require('./snatch.js');
     //sh = require('./suggestionHandling.js');
 
@@ -83,3 +85,5 @@ var stuff = {
 };
 
 module.exports = stuff;
+
+//setInterval(pt.checkTime(client), 1000);

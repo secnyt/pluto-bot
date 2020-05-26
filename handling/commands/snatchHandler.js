@@ -125,11 +125,13 @@ snh.handle = function(msg, client){
             // organize and setup parameters
             
             // remove irrelevant flags
+            /*
             parameters.forEach((p, i) => {
                 if(!p.startsWith('.') || (!p === "create" && !i == 0)){
                     parameters.splice(i, 1);
                 }
             });
+            */
             if(snatch == "create"){
                 create = true;
             }
@@ -140,34 +142,48 @@ snh.handle = function(msg, client){
                     allSnatches[gid] = gsn;
                     write(allSnatches);
                 }
-                //console.log(Object.keys(gsn));
+                console.log(Object.keys(gsn));
+                console.log(snatch);
                 if(Object.keys(gsn).includes(snatch)){
-                    msg.channel.send(gsn[snatch].key);
+                    console.log('yay');
+                    msg.channel.send(gsn[snatch].value);
                 }
             }
             else if(create == true){
 
                 let key;
-                let value;
+                let value = '';
 
-                console.log(parameters);
+                //console.log(parameters);
                 key = parameters[0];
-                console.log(key);
+                //console.log(key);
                 let d = false;
 
                 let flags = [];
 
                 for(var i of parameters){
-                    var w = parameters[i + 1];
-                    var wArray = w.split('');
-                    if((i + 1) < parameters.length){
+                    console.log('I');
+                    let newi = i + 1;
+                    var w = parameters[i];
+                    var wArray;
+                    if(i < parameters.length){
+                        console.log('work');
+                        wArray = w.split('');
                         if(!d){
+                            console.log(d);
                             if(!wArray[wArray.length - 1] == ":"){
+                                console.log('!:');
                                 value += w;
                             }
                             else if(wArray[wArray.length - 1] == ":"){
+                                console.log(':');
                                 d = true;
-                                value += w;
+                                wArray.splice((wArray.length - 1), 1);
+                                var newW = ''
+                                wArray.forEach(word => {
+                                    newW += (word + ' ');
+                                })
+                                value += newW;
                             }
                         }
                         else {

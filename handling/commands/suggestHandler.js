@@ -27,6 +27,10 @@ sgh.handle = function(msg, client){
     var uid = msg.author.id;
     // =suggest <content>
     var suggestion = msg.content.split('=suggest ')[1];
+    if(suggestion.length > 80){
+        msg.channel.send('Please keep your suggestion brief and keep it under 80 characters! Thank you for not crashing me or my creator\'s hardware :D.');
+        return;
+    }
     suggestion = new Suggestion(suggestion, gid, uid)
 
     if(!sgs[gid]){
