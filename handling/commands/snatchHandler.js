@@ -7,10 +7,11 @@ var allSnatches = JSON.parse(fs.readFileSync('./storage/snatches/snatches.json')
 var snh = {};
 
 class Snatch {
-    constructor(k, v, p){
+    constructor(k, v, p, r){
         this.key = k;
         this.val = v;
         this.perms = p;
+        this.reserved = false;
     }
 }
 
@@ -18,104 +19,16 @@ var write = function(data){
     fs.writeFileSync('./storage/snatches/snatches.json', JSON.stringify(data, null, 4));
 };
 
-snh.handleSnatch1 = function(msg, tbs, parameters, client, data){
-    //console.log(tbs);
-    // returns "soh"
-    switch(tbs){ 
-        case "soh":
-            if(data.hasTMNec){
-                //stuff.er.TMP(msg);
-                break;
-            }
-            if(!data.hasNec){
-                //stuff.er.NP(msg);
-                break;
-            }
-            // Japanese
-            if(parameters.includes('.j')){
-                // DM
-                if(parameters.includes('.D')){
-                    // DM user
-                    client.users.cache.get(msg.author.id).send('我々の頭を揺らす');
-                }
-                else {
-                    msg.channel.send('我々の頭を揺らす');
-                }
-            }
-            // delete
-            if(parameters.includes('.d')){
-               msg.delete();
-            }
-            break;
-
-        case "smh":
-
-            // coming soon
-            //stuff.er.CS(msg);
-            break;
-
-        case "secnytplaylist":
-
-            // DM
-            if(parameters.includes('.D')){
-               // DM user
-               client.users.cache.get(msg.author.id).send('r!play https://www.youtube.com/playlist?list=PLShq-al0vKZ2-Oi2RfRNVltc8dPt4xLcI');
-            }
-            else {
-                msg.channel.send('https://www.youtube.com/playlist?list=PLShq-al0vKZ2-Oi2RfRNVltc8dPt4xLcI');
-            }
-            // delete
-            if(parameters.includes('.d')){
-               msg.delete();
-            }
-            break;
-        
-        case "icon":
-
-            // DM
-            if(parameters.includes('.D')){
-                // DM user
-                client.users.cache.get(msg.author.id).send(client.users.cache.get(msg.author.id).avatarURL());
-            }
-            else {
-                //console.log(msg);
-                try{
-                    msg.channel.send(client.users.cache.get(msg.author.id).avatarURL());
-                }catch(err){
-                    throw err;
-                }
-            }
-            // delete
-            if(parameters.includes('.d')){
-                msg.delete();
-            }
-            break;
-
-        default:
-            msg.channel.send('No comprendo.')
-            break;
-    }
-}
-
-
 snh.handle = function(msg, client){
     allSnatches = JSON.parse(fs.readFileSync('./storage/snatches/snatches.json'));
     //console.log(allSnatches);
     var gid = msg.guild.id;
     var gsn = allSnatches[gid];
     //console.log(gsn);
-    let command = msg.content.split('/')[1];
-    let parameters = command.split(" ");
-    let c = parameters.splice(0, 1)[0];
-    switch(c){
+    let parameters = msg.content.split(" ");
+    var command = parameters.splice(0, 1)[0].split('/')[1];
+    switch(command){
         case "s":
-            //var toBreak = false;
-
-            // basically useless, though may be useful later 
-            var errs = {
-                hasTMNec: false,
-                hasNec: true
-            };
 
             // separate first parameter (to be snatched)
             let snatch = parameters.splice(0, 1)[0];
@@ -142,11 +55,18 @@ snh.handle = function(msg, client){
                     allSnatches[gid] = gsn;
                     write(allSnatches);
                 }
-                console.log(Object.keys(gsn));
-                console.log(snatch);
                 if(Object.keys(gsn).includes(snatch)){
                     //console.log('yay');
-                    msg.channel.send(gsn[snatch].val);
+                    var value = gsn[snatch].val;
+                    if(parameters.includes('.D')){
+                        msg.author.send(value);
+                    }
+                    else{
+                        msg.channel.send(value);
+                    }
+                    if(parameters.includes('.d')){
+                        msg.delete();
+                    }
                 }
             }
             else if(create == true){
@@ -162,17 +82,18 @@ snh.handle = function(msg, client){
                 let flags = [];
 
                 parameters.forEach((p, i) => {
-                    console.log('I');
+                    //console.log('I');
                     let newi = i + 1;
                     var w = parameters[i];
                     var wArray;
                     if(i){
-                        console.log('work');
+                        //console.log('work');
                         wArray = p.split('');
                         if(!d){
-                            console.log(d);
+                            //console.log(d);
+                            //console.log(wArray[wArray.length - 1])
                             if(wArray[wArray.length - 1] == ":"){
-                                console.log(':');
+                                //console.log(':');
                                 d = true;
                                 wArray.splice((wArray.length - 1), 1);
                                 var newW = ''
@@ -181,7 +102,7 @@ snh.handle = function(msg, client){
                                 })
                                 value += (newW + ' ');
                             } else {
-                                console.log('!:');
+                                //console.log('!:');
                                 value += (p + ' ');
                             }
                         }
@@ -193,60 +114,73 @@ snh.handle = function(msg, client){
 
                 var perms = [];
                 var onDup = 'a';
-
+                //console.log(flags);
                 flags.forEach((f, i) => {
-                    if(f == '.w'){
-                        perms.push('w');
-                        flags.splice(i, 1)
-                    }
-                    else if(f == '.a'){
-                        perms.push('w');
-                        flags.splice(i, 1)
-                    }
-                    else if(f == '.o'){
-                        onDup = 'o';
-                        flags.splice(i, 1)
-                    }
-                    else if(f == '.c'){
-                        onDup = 'c';
-                        flags.splice(i, 1)
+                    //console.log(f)
+                    switch(f){
+                        case '.w':
+                            perms.push('w');
+                            //flags.splice(i, 1)
+                            break;
+                        case '.a':
+                            perms.push('a');
+                            //flags.splice(i, 1)
+                            break;
+                        case '.o':
+                            onDup = 'o';
+                            //flags.splice(i, 1)
+                            break;
+                        case '.c':
+                            onDup = 'c';
+                            //flags.splice(i, 1)
+                            break;
                     }
                 });
                 
-                var newSnatch = new Snatch(key, value, perms);
+                var newSnatch = new Snatch(key, value, perms, false);
 
                 if(!gsn){
                     gsn = {};
                 }
 
-                let toPush = true;
+                var toPush = true;
 
                 if(gsn[newSnatch.key]){
                     switch(onDup){
                         case 'a':
-                            console.log('abc' + gsn[newSnatch.key])
+                            //console.log('abc' + gsn[newSnatch.key])
                             if(gsn[newSnatch.key]){
                                 msg.channel.send('This key is already in use, or it is reserved.\nYou didn\'t specify an option in case of this happening, so by default, the creation is canceled.');
                                 toPush = false;
                             }
                             else {
-                                msg.channel.send(`The snatch \`${newSnatch.key}\` has been created with value \`${newSnatch.value}\`.`)
+                                toPush = true;
                             }
                             break;
                         case 'c':
                             msg.channel.send('This key is in use and the creation has been canceled.');
                             toPush = false;
+                            break;
                         case 'o':
-                            msg.channel.send('This key is in use, but has been overwritten.');
-                            toPush = true;
+                            if(!gsn[newSnatch.key].reserved){
+                                msg.channel.send('This key is in use, but has been overwritten.');
+                                toPush = true;
+                                break;
+                            }
+                            else {
+                                msg.channel.send('This key is reserved! It cannot be overwritten.');
+                                toPush = false;
+                            }
+                            break;
                     }
                 }
 
                 gsn[newSnatch.key] = newSnatch;
                 allSnatches[gid] = gsn;
-
-                write(allSnatches);
-                msg.channel.send(`Your snatch has been created!`);
+                if(toPush){
+                    write(allSnatches);
+                    msg.channel.send(`The snatch \`${newSnatch.key}\` has been created with value \`${newSnatch.val}\`.`)
+                }
             }
     }
 }

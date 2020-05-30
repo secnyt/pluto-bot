@@ -12,6 +12,7 @@ var package = require('./package.json');
 var ch;
 var c;
 var pt;
+var sch;
 //var snatch;
 //var sh;
 
@@ -39,6 +40,7 @@ client.on('ready', () => {
     snh = require('./handling/commands/snatchHandler.js');
     c = require('./captcha/captcha.js');
     pt = require('./misc/piTime.js');
+    //sch = require('./misc/secnytHandling');
     //snatch = require('./snatch.js');
     //sh = require('./suggestionHandling.js');
 
@@ -50,15 +52,21 @@ client.on('ready', () => {
 client.on('message', msg => {
     //c.test(msg, client);
     // if bot, don't allow
-    if(!msg.author.bot){
-        // if the message starts with the prefix
-        if(msg.content.startsWith(package.prefix)){
-            ch.handleP(msg, client);
-            
+    if(msg.channel.type == 'text'){
+        if(!msg.author.bot){
+            // if the message starts with the prefix
+            if(msg.content.startsWith(package.prefix)){
+                ch.handleP(msg, client);
+                
+            }
+            if(msg.content.startsWith("/")){
+                ch.handleS(msg, client);
+            }
         }
-        if(msg.content.startsWith("/")){
-            ch.handleS(msg, client);
-        }
+    }
+    if(msg.channel.id == '697952569405735014' && !msg.author.bot){
+        sch = require('./misc/secnytHandling');
+        sch.handle(msg, client);
     }
 });
 
