@@ -50,6 +50,16 @@ sch.handle = function(msg, client){
         
         msg.channel.send('okay everything deleted')
     }
+    if(msg.content.startsWith('color me ')){
+        msg.channel.send('i hear color me')
+        var hex = msg.content.split('color me ')[1];
+        msg.channel.send('your color is ' + hex)
+        var secnytRole = client.guilds.cache.get('691793782466674718').roles.cache.get('716457447916830791');
+        secnytRole.edit({
+            color: hex
+        })
+
+    }
 }
 
 module.exports = sch;

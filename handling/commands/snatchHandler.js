@@ -154,7 +154,7 @@ snh.handle = function(msg, client){
                                 toPush = false;
                             }
                             else {
-                                toPush = true;
+                                toPush = true;  
                             }
                             break;
                         case 'c':

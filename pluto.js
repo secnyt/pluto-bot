@@ -13,6 +13,7 @@ var ch;
 var c;
 var pt;
 var sch;
+var jh;
 //var snatch;
 //var sh;
 
@@ -40,6 +41,7 @@ client.on('ready', () => {
     snh = require('./handling/commands/snatchHandler.js');
     c = require('./captcha/captcha.js');
     pt = require('./misc/piTime.js');
+    jh = require('./handling/joinHandler')
     //sch = require('./misc/secnytHandling');
     //snatch = require('./snatch.js');
     //sh = require('./suggestionHandling.js');
@@ -70,26 +72,12 @@ client.on('message', msg => {
     }
 });
 
-
-
-// custom error messages
-const errors = {
-    NAP: function(msg){
-        msg.channel.send(`I don't understand any of your arguments!`);
-    },
-    NP: function(msg){
-        msg.channel.send(`You don't have acceptable arguments!`);
-    },
-    CS: function(msg){
-        msg.channel.send(`This functionality is coming soon! Try me later!`);
-    },
-    TMP: function(msg){
-        msg.channel.send(`You have too many necessary flags! You need one, and only one.`);
-    }
-};
+client.on('guildMemberAdd', member => {
+    jh.handle(msg, client, member);
+});
 
 var stuff = {
-    er: errors
+
 };
 
 module.exports = stuff;
