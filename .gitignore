@@ -110,3 +110,6 @@ dist
 /auth.json
 /storage/suggestions/suggestions.json
 /storage/snatches
+/captcha
+!/captcha/captcha.js
+/server specific options stuff/serverOptions.json
