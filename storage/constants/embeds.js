@@ -24,7 +24,7 @@ e.help = function(){
         )
         //.setImage(plutoImage)
         .setTimestamp()
-        .setFooter('Pluto Help Page · Created by Secnyt', secnytImage);
+        .setFooter('Pluto Help Page • Created by Secnyt', secnytImage);
     return embed
 }
 
@@ -43,7 +43,7 @@ e.snatch = function(){
         )
         //.setImage(plutoImage)
         .setTimestamp()
-        .setFooter('Pluto Snatch Help Page · Created by Secnyt');
+        .setFooter('Pluto Snatch Help Page • Created by Secnyt');
     return embed
 }
 

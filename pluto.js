@@ -73,7 +73,7 @@ client.on('message', msg => {
 });
 
 client.on('guildMemberAdd', member => {
-    jh.handle(msg, client, member);
+    jh.handle(client, member);
 });
 
 var stuff = {

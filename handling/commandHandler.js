@@ -8,6 +8,7 @@ const hh = require('./commands/helpHandler.js');
 const sgh = require('./commands/suggestHandler.js');
 const qh = require('./commands/queueHandler.js');
 const cph = require('./../captcha/captcha.js');
+const sgr = require('./commands/suggestRemove');
 const Discord = require('discord.js');
 const soh = require('./../server specific options stuff/serverOptionsHandler.js');
 
@@ -37,13 +38,21 @@ ch.handleP = function (msg, client) {
 
             break;
         case 'server':
-            soh.handle(msg, client);
+            soh[0].handle(msg, client);
             break;
         case "queue":
         case "votequeue":
         case "suggestions":
             qh.handle(msg, client);
             break;
+        case "sgr":
+        case "sr":
+        case "suggestionr":
+        case "sremove":
+        case "suggestionremove":
+        case "removesuggestion":
+        case "rs":
+            sgr.remove(msg, client);
     }
 }
 ch.handleS = async function (msg, client) {
