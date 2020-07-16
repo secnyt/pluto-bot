@@ -114,3 +114,5 @@ dist
 /captcha
 !/captcha/captcha.js
 /server specific options stuff/serverOptions.json
+/misc/jellenHandling.js
+/misc/secnytHandling.js

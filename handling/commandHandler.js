@@ -1,6 +1,7 @@
 // Importing
 var mehi = ('bot');
 var jellen = ('super cool and epic, the most of them out of every single living thing ever');
+
 const package = require('../package.json');
 const snh = require('./commands/snatchHandler.js');
 const embeds = require('../storage/constants/embeds.js');
@@ -37,6 +38,7 @@ ch.handleP = function (msg, client) {
         case "nextvote":
 
             break;
+            
         case 'server':
             soh[0].handle(msg, client);
             break;
