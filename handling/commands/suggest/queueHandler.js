@@ -1,7 +1,7 @@
-const suggestions = require('./../../storage/suggestions/suggestions.json');
+const suggestions = require('./../../../storage/suggestions/suggestions.json');
 const Discord = require('discord.js');
 const fs = require('fs');
-const package = require('./../../package.json')
+const package = require('./../../../package.json')
 
 var qh = {};
 

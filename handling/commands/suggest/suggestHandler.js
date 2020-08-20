@@ -1,5 +1,5 @@
 const fs = require('fs');
-var suggestions = require('./../../storage/suggestions/suggestions.json');
+var suggestions = require('./../../../storage/suggestions/suggestions.json');
 
 var sgs = {};
 

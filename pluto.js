@@ -87,7 +87,7 @@ function setup(){
 
     // external js
     ch = require('./handling/commandHandler');
-    snh = require('./handling/commands/snatchHandler.js');
+    snh = require('./handling/commands/PlutoObjectNotation/snatchHandler.js');
     c = require('./captcha/captcha.js');
     pt = require('./misc/piTime.js');
     jh = require('./handling/joinHandler');
@@ -102,9 +102,7 @@ function setup(){
 function abc(){
     if(doCustom && ready){
         var jellen = client.users.fetch('702576599295590563', true).then((user) => {
-            console.log('sending message...')
             user.send('hello').then((sent) => {
-                console.log('sent message');
             })
         })
     }

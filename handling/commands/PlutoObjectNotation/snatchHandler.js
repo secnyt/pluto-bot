@@ -1,5 +1,5 @@
 //const stuff = require('./../../pluto.js');
-const package = require('./../../package.json');
+const package = require('./../../../package.json');
 const fs = require('fs');
 
 var allSnatches = JSON.parse(fs.readFileSync('./storage/snatches/snatches.json'));
@@ -111,6 +111,10 @@ snh.handle = function(msg, client){
                         }
                     }
                 });
+                
+                if(value.substring(0, value.length - 1) == value.trim()){
+                    value = value.substring(0, value.length - 1);
+                };
 
                 var perms = [];
                 var onDup = 'a';

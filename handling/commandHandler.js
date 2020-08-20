@@ -3,13 +3,13 @@ var mehi = ('bot');
 var jellen = ('super cool and epic, the most of them out of every single living thing ever');
 
 const package = require('../package.json');
-const snh = require('./commands/snatchHandler.js');
+const snh = require('./commands/PlutoObjectNotation/snatchHandler.js');
 const embeds = require('../storage/constants/embeds.js');
 const hh = require('./commands/helpHandler.js');
-const sgh = require('./commands/suggestHandler.js');
-const qh = require('./commands/queueHandler.js');
+const sgh = require('./commands/suggest/suggestHandler.js');
+const qh = require('./commands/suggest/queueHandler.js');
 const cph = require('./../captcha/captcha.js');
-const sgr = require('./commands/suggestRemove');
+const sgr = require('./commands/suggest/suggestRemove');
 const Discord = require('discord.js');
 const soh = require('./../server specific options stuff/serverOptionsHandler.js');
 
@@ -30,6 +30,8 @@ ch.handleP = function (msg, client) {
             break;
 
         case "suggest":
+        case "sg":
+        case "addqueue":
             sgh.handle(msg, client);
             break;
 
