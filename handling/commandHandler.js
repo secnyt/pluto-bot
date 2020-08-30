@@ -12,6 +12,7 @@ const cph = require('./../captcha/captcha.js');
 const sgr = require('./commands/suggest/suggestRemove');
 const Discord = require('discord.js');
 const soh = require('./../server specific options stuff/serverOptionsHandler.js');
+const pon = require('./commands/PlutoObjectNotation/plutoObjectNotation.js');
 
 var ch = {};
 
@@ -57,6 +58,12 @@ ch.handleP = function (msg, client) {
         case "removesuggestion":
         case "rs":
             sgr.remove(msg, client);
+            break;
+        case "compile":
+            msg.channel.send(pon.compile(msg, "msg"));
+            break;
+        case "support":
+            msg.channel.send("Come join us at the Official Pluto Support Server! (OPSS)\nhttps://bit.ly/join-pluto-support")
     }
 }
 ch.handleS = async function (msg, client) {

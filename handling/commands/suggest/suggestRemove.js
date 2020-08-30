@@ -11,12 +11,12 @@ sgr.remove = (msg, client) => {
         sgs = JSON.parse(fs.readFileSync('./storage/suggestions/suggestions.json'));
         try{
             var num = msg.content.split(' ')[1];
-            if(num != undefined){
+            if(num ){
                 sgs[msg.guild.id].splice(num - 1, 1);
                 msg.channel.send("Deleted suggestion number " + (num));
                 write(sgs);
             } else {
-                msg.channel.send('You must specify an index to delete!');
+                msg.channel.send('You must specify an index (integer) to delete!');
             }
         }catch(err){
             msg.channel.send(`Could not delete suggestion.`);

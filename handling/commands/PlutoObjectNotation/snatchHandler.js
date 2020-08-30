@@ -1,6 +1,9 @@
 //const stuff = require('./../../pluto.js');
 const package = require('./../../../package.json');
 const fs = require('fs');
+const pon = require('./plutoObjectNotation.js');
+var MongoClient = require('mongodb').MongoClient;
+var url = "mongodb://localhost:27017/";
 
 var allSnatches = JSON.parse(fs.readFileSync('./storage/snatches/snatches.json'));
 
@@ -20,172 +23,155 @@ var write = function(data){
 };
 
 snh.handle = function(msg, client){
-    allSnatches = JSON.parse(fs.readFileSync('./storage/snatches/snatches.json'));
-    //console.log(allSnatches);
-    var gid = msg.guild.id;
-    var gsn = allSnatches[gid];
-    //console.log(gsn);
-    let parameters = msg.content.split(" ");
-    var command = parameters.splice(0, 1)[0].split('/')[1];
-    switch(command){
-        case "s":
+    try{
+        allSnatches = JSON.parse(fs.readFileSync('./storage/snatches/snatches.json'));
+        //console.log(allSnatches);
+        var gid = msg.guild.id;
+        var gsn = allSnatches[gid];
+        //console.log(gsn);
+        let parameters = msg.content.split(";");
+        
+        var command = parameters[0].split(" ")[1];
+        var key = parameters[1];
+        var flags = [];
+        if(parameters[3]){
+            flags = parameters[3].split(' ');
+            console.log(flags);
+        }
+        parameters.forEach((v, i) => {
+            parameters[i] = v.trim();
+        });
+        
 
-            // separate first parameter (to be snatched)
-            let snatch = parameters.splice(0, 1)[0];
-
-            // is the user trying to create a Snatch (default no)
-            let create = false;
-            // organize and setup parameters
-            
-            // remove irrelevant flags
-            /*
-            parameters.forEach((p, i) => {
-                if(!p.startsWith('.') || (!p === "create" && !i == 0)){
-                    parameters.splice(i, 1);
+        switch(command){
+            case "create":
+            case "add":
+                var snatch = pon.compile(parameters[2], "vanilla");
+                if(!parameters[2]){
+                    msg.channel.send("You are missing the snatch parameter! Make sure you are separating with a semicolon (;)");
                 }
-            });
-            */
-            if(snatch == "create"){
-                create = true;
-            }
-            // ADD IN PERMISSION CHECKER (must have admin or higher) PLUS CAPTCHA SYSTEM
-            if(create == false){
-                if(!gsn){
-                    gsn = {};
-                    allSnatches[gid] = gsn;
-                    write(allSnatches);
+                else if(!parameters[2].trim().startsWith("s(\"")){
+                    msg.channel.send("Your `snatch` parameter must be in PlutoObjectNotation<String> form. ex. `s(\"ABC 123.\")`");
                 }
-                if(Object.keys(gsn).includes(snatch)){
-                    //console.log('yay');
-                    var value = gsn[snatch].val;
-                    if(parameters.includes('.D')){
-                        msg.author.send(value);
-                    }
-                    else{
-                        msg.channel.send(value);
-                    }
-                    if(parameters.includes('.d')){
-                        msg.delete();
-                    }
-                }
-            }
-            else if(create == true){
+                else if(!snatch){
+                    msg.channel.send("You can't create an empty snatch!");
+                } else {
+                    var exists = true;
+                    MongoClient.connect(url, (err, db) => {
+                        if(err) console.error(err);
 
-                let key;
-                let value = '';
+                        var dbo = db.db('pluto-snatches');
+                        var get = {
+                            guild: gid
+                        }
+                        dbo.collection(" guilds").find(get).toArray((err, res) => {
+                            if(err) throw err;
+                            //console.log(res);
+                            if(!res){
+                                exists = false;
+                            }
+                        });
+                    });
+                    MongoClient.connect(url, (err, db) => {
+                        if(err) throw err;
 
-                //console.log(parameters);
-                key = parameters[0];
-                //console.log(key);
-                let d = false;
-
-                let flags = [];
-
-                parameters.forEach((p, i) => {
-                    //console.log('I');
-                    let newi = i + 1;
-                    var w = parameters[i];
-                    var wArray;
-                    if(i){
-                        //console.log('work');
-                        wArray = p.split('');
-                        if(!d){
-                            //console.log(d);
-                            //console.log(wArray[wArray.length - 1])
-                            if(wArray[wArray.length - 1] == ":"){
-                                //console.log(':');
-                                d = true;
-                                wArray.splice((wArray.length - 1), 1);
-                                var newW = ''
-                                wArray.forEach(word => {
-                                    newW += (word);
+                        var dbo = db.db('pluto-snatches');
+                        var ins = {
+                            key: parameters[1],
+                            snatch: snatch,
+                            reserved: false,
+                            permissions: []
+                        };
+                        
+                        if(!exists){
+                            dbo.createCollection(gid, (err, res) => {
+                                if(err) throw err;
+                                //console.log('collection created');
+                            })
+                        }
+                        var get = {
+                            key: parameters[1]
+                        }
+                        snatchExists = false;
+                        dbo.collection(gid).find(get).toArray((err, res) => {
+                            if(err) console.error(err);
+                            snatchExists = res[0];
+                            console.log(snatchExists);
+                            if(!snatchExists){
+                                console.log('abc');
+                                snatchExists = false;
+                            }
+                            if(flags.includes('.o') || flags.includes('..overwrite') || flags.includes('..override')){
+                                dbo.collection(gid).findOneAndReplace(get, ins, (err, res) => {
+                                    if(err) throw err;
+                                    //console.log('snatch inserted');
+                                    msg.channel.send('Your snatch has been processed and updated.')
+                                    db.close();
                                 })
-                                value += (newW + ' ');
+                            } else if(snatchExists){
+                                msg.channel.send('A snatch with this key exists. Please specify in a flag whether you would like to overwrite. ```/s command; key; PON<string>; **flags**\n```')
                             } else {
-                                //console.log('!:');
-                                value += (p + ' ');
+                                console.log(snatchExists);
+                                dbo.collection(gid).insertOne(ins, (err, res) => {
+                                    if(err) throw err;
+                                    //console.log('snatch inserted');
+                                    msg.channel.send('Your snatch has been processed and uploaded.')
+                                    db.close();
+                                }) 
                             }
+                        });
+                        
+                        if(flags.includes('.d') || flags.includes('..delete')){
+                            msg.delete();
                         }
-                        else {
-                            flags.push(w);
-                        }
-                    }
-                });
-                
-                if(value.substring(0, value.length - 1) == value.trim()){
-                    value = value.substring(0, value.length - 1);
-                };
 
-                var perms = [];
-                var onDup = 'a';
-                //console.log(flags);
-                flags.forEach((f, i) => {
-                    //console.log(f)
-                    switch(f){
-                        case '.w':
-                            perms.push('w');
-                            //flags.splice(i, 1)
-                            break;
-                        case '.a':
-                            perms.push('a');
-                            //flags.splice(i, 1)
-                            break;
-                        case '.o':
-                            onDup = 'o';
-                            //flags.splice(i, 1)
-                            break;
-                        case '.c':
-                            onDup = 'c';
-                            //flags.splice(i, 1)
-                            break;
-                    }
-                });
-                
-                var newSnatch = new Snatch(key, value, perms, false);
-
-                if(!gsn){
-                    gsn = {};
+                    });
                 }
+                break;
+            case "get":
+            case "snatch":
+            case "use":
+                try {
+                    var key = parameters[1];
 
-                var toPush = true;
+                    MongoClient.connect(url, (err, db) => {
+                        var dbo = db.db('pluto-snatches');
+                        var get = {
+                            key: key
+                        };
 
-                if(gsn[newSnatch.key]){
-                    switch(onDup){
-                        case 'a':
-                            //console.log('abc' + gsn[newSnatch.key])
-                            if(gsn[newSnatch.key]){
-                                msg.channel.send('This key is already in use, or it is reserved.\nYou didn\'t specify an option in case of this happening, so by default, the creation is canceled.');
-                                toPush = false;
+                        dbo.collection(gid).find(get).toArray((err, res) => {
+                            try{
+                                console.log(res);
+                                console.log(res[0]);
+                                res = res[0].snatch;
+                                if(err){
+                                    console.error(err);
+                                    msg.channel.send(`This snatch does (most likely) not exist. If you believe this was in error, please join the support server for help. (\`${require('./../../../package.json').prefix}support\`)`);
+                                };
+                                msg.channel.send(res);
+                                console.log(res);
+                                db.close();
+                            } catch(err){
+                                console.error(err);
+                                msg.channel.send(`This snatch does (most likely) not exist. If you believe this was in error, please join the support server for help. (\`${require('./../../../package.json').prefix}support\`)`)
                             }
-                            else {
-                                toPush = true;  
-                            }
-                            break;
-                        case 'c':
-                            msg.channel.send('This key is in use and the creation has been canceled.');
-                            toPush = false;
-                            break;
-                        case 'o':
-                            if(!gsn[newSnatch.key].reserved){
-                                msg.channel.send('This key is in use, but has been overwritten.');
-                                toPush = true;
-                                break;
-                            }
-                            else {
-                                msg.channel.send('This key is reserved! It cannot be overwritten.');
-                                toPush = false;
-                            }
-                            break;
+                        })
+                    });
+                } catch(err){
+                    if(err) {
+                        console.error(err);
+                        msg.channel.send(`This snatch does (most likely) not exist. If you believe this was in error, please join the support server for help. (\`${require('./../../../package.json').prefix}support\`)`);
                     }
                 }
-
-                gsn[newSnatch.key] = newSnatch;
-                allSnatches[gid] = gsn;
-                if(toPush){
-                    write(allSnatches);
-                    msg.channel.send(`The snatch \`${newSnatch.key}\` has been created with value \`${newSnatch.val}\`.`)
-                }
-            }
+                break;
+            default:
+                msg.channel.send("I don't understand what you are trying to do! Parameter 1, ```/s **command**; key; PON<string>; flags\n```");
+                break;
+        }
+    } catch(err){
+        console.error(err);
+        msg.channel.send('Something went wrong. Check your syntax for both the command and PlutoObjectNotation.')
     }
 }
 
