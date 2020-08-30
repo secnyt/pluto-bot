@@ -18,6 +18,7 @@ PlutoObjectNotation.compile = (pon, type) => {
     var out = "";
     if(pon.includes("s(\"")){
         p = pon.split("\"");
+        if(p.length > 3) return '';
         //console.log(p);
         p.forEach((w, i) => {
             w = w.trim();
