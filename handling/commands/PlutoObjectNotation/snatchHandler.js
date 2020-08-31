@@ -120,7 +120,7 @@ snh.handle = function(msg, client){
                     MongoClient.connect(url, (err, db) => {
                         var dbo = db.db('pluto-snatches');
                         var get = { // query to find snatch
-                            key: key
+                            key: parameters[1]
                         };
 
                         dbo.collection(gid).find(get).toArray((err, res) => { // find query and return array
