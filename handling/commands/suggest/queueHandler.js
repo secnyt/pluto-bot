@@ -13,7 +13,7 @@ qh.handle = function(msg, client){
     sgs = JSON.parse(fs.readFileSync('./storage/suggestions/suggestions.json'));
     var servSgs = sgs[msg.guild.id];
     //console.log(sgs);
-    var pageNum = parseInt(msg.content.split('=queue ')[1], 10) - 1;
+    var pageNum = parseInt(msg.content.split(' ')[1], 10) - 1;
     if(!pageNum){
         pageNum = 0;
     }

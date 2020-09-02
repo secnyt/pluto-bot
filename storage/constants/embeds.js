@@ -17,10 +17,13 @@ e.help = function(){
         .setThumbnail(plutoImage)
         .addFields(
             { name: '\u200B', value: '\u200B' },
-            { name: `${package.prefix}help, ${package.prefix}commands`, value: `Brings up this menu.\n\`Usage: ${package.prefix}help\`` },
+            { name: `${package.prefix}help, ${package.prefix}commands`, value: `Brings up this menu.\nUsage: \`${package.prefix}help\`` },
             { name: '\u200B', value: '\u200B' },
-            { name: `${package.prefix}suggest`, value: `Make a suggestion.\n\nUsage: \`${package.prefix}suggest <suggestion>\``, inline: true },
-            { name: `${package.prefix}queue, ${package.prefix}suggestions`, value: `Shows suggestion queue for the server.\n\`Usage: ${package.prefix}suggestions\``, inline: true },
+            { name: `${package.prefix}suggest, =addqueue, =sg`, value: `Make a suggestion.\nUsage: \`${package.prefix}suggest <suggestion>\``, inline: true },
+            { name: `${package.prefix}queue, ${package.prefix}suggestions`, value: `Shows suggestion queue for the server.\nUsage: \`${package.prefix}suggestions <page number>\``, inline: true },
+            { name: `${package.prefix}sgr, ${package.prefix}suggestionremove`, value: `Used to remove Suggestions from queue.\nUsage: \`=sgr <suggestion number>\``, inline: true},
+            { name: `/s create, /s get`, value: `Used to access Pluto's Snatch API.\nUsage: \`/s help\``, inline: true},
+            { name: `${package.prefix}snatches`, value: `Shows snatch list for the server.\nUsage: \`${package.prefix}snatches <page number>\``, inline: true },
         )
         //.setImage(plutoImage)
         .setTimestamp()
@@ -38,8 +41,8 @@ e.snatch = function(){
         .setThumbnail(plutoImage)
         .addFields(
             { name: '\u200B', value: '\u200B' },
-            { name: `Create a Snatch`, value: `Creates a Snatch which is unique to the server.\n\`Usage: /s create <keyword> <value>: [flags]\`` },
-            { name: `Use a Snatch`, value: `Returns the <value> of the Snatch with the <keyword>.\nUsage: \`/s <keyword>\`\nReturns: \`<value>\``},
+            { name: `Create a Snatch`, value: `Creates a Snatch which is unique to the server.\n\`Usage: /s create; <keyword>; s("<value>"); [flags]\`` },
+            { name: `Use a Snatch`, value: `Returns the <value> of the Snatch with the <keyword>.\nUsage: \`/s get; <keyword>\`\nReturns: \`<value>\``},
         )
         //.setImage(plutoImage)
         .setTimestamp()

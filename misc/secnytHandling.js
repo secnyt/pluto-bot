@@ -1,7 +1,5 @@
 const fs = require('fs');
 
-var snatch = fs.readFileSync('./storage/snatches/snatches.json');
-
 var sch = {};
 
 sch.handle = function(msg, client){

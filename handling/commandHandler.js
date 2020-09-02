@@ -3,7 +3,7 @@ var mehi = ('bot');
 var jellen = ('super cool and epic, the most of them out of every single living thing ever');
 
 const package = require('../package.json');
-const snh = require('./commands/PlutoObjectNotation/snatchHandler.js');
+const snh = require('./commands/snatch/snatchHandler.js');
 const embeds = require('../storage/constants/embeds.js');
 const hh = require('./commands/helpHandler.js');
 const sgh = require('./commands/suggest/suggestHandler.js');
@@ -13,6 +13,7 @@ const sgr = require('./commands/suggest/suggestRemove');
 const Discord = require('discord.js');
 const soh = require('./../server specific options stuff/serverOptionsHandler.js');
 const pon = require('./commands/PlutoObjectNotation/plutoObjectNotation.js');
+const snqh = require('./commands/snatch/snatchesHandler');
 
 var ch = {};
 
@@ -49,6 +50,9 @@ ch.handleP = function (msg, client) {
         case "votequeue":
         case "suggestions":
             qh.handle(msg, client);
+            break;
+        case "snatches":
+            snqh.handle(msg, client);
             break;
         case "sgr":
         case "sr":

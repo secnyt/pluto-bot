@@ -87,7 +87,7 @@ function setup(){
 
     // external js
     ch = require('./handling/commandHandler');
-    snh = require('./handling/commands/PlutoObjectNotation/snatchHandler.js');
+    snh = require('./handling/commands/snatch/snatchHandler.js');
     c = require('./captcha/captcha.js');
     pt = require('./misc/piTime.js');
     jh = require('./handling/joinHandler');

@@ -1,11 +1,8 @@
-//const stuff = require('./../../pluto.js');
 const package = require('./../../../package.json');
 const fs = require('fs');
-const pon = require('./plutoObjectNotation.js');
+const pon = require('./../PlutoObjectNotation/plutoObjectNotation.js');
 var MongoClient = require('mongodb').MongoClient;
 var url = "mongodb://localhost:27017/";
-
-var allSnatches = JSON.parse(fs.readFileSync('./storage/snatches/snatches.json'));
 
 var snh = {};
 
@@ -138,11 +135,21 @@ snh.handle = function(msg, client){
                             }
                         })
                     });
+                    if(flags.includes(".d") || flags.includes("..delete")){
+                        msg.delete();
+                    }
                 } catch(err){
                     if(err) {
                         console.error(err);
                         msg.channel.send(`This snatch does (most likely) not exist. If you believe this was in error, please join the support server for help. (\`${require('./../../../package.json').prefix}support\`)`);
                     }
+                }
+                break;
+            case "help":
+                try {
+                    msg.channel.send(`Use the syntax \`${package.prefix}s create; Key; s("Snatch Data")\` to create a snatch.\nUse the syntax \`${package.prefix}s snatch; Key\` to get data from an existing snatch.\nFor further info, please see the official snatch documentation.`)
+                } catch (err) {
+                    msg.channel.send(`Something went wrong.`);
                 }
                 break;
             default: // didn't specify a working command
