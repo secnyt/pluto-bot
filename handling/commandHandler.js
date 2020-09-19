@@ -78,6 +78,7 @@ ch.handleP = async function (msg, client) {
         case "suggestionr":
         case "sremove":
         case "suggestionremove":
+        case "suggestremove":
         case "removesuggestion":
         case "rs":
             sgr.remove(msg, client);

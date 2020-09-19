@@ -25,12 +25,12 @@ snqh.handle = (msg, client) => {
                     var page = 0;
                     page = Math.floor(i/10);
                     if(message[page]){
-                        message[page].push(`\`${s.key}\`   \|​\|   \`${s.snatch}\``);
+                        message[page].push(`\`${s.key.replace('`', "​\`")}\`   \|​\|   \`${s.snatch}\``);
                         //console.log('abc ', message)
                     }
                     else {
                         message[page] = [];
-                        message[page].push(`\`${s.key}\`   \|​\|   \`${s.snatch}\``);
+                        message[page].push(`\`${s.key.replace('`', "​\`")}\`   \|​\|   \`${s.snatch}\``);
                         //console.log('123 ', message)
                     }
                 });
