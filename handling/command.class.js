@@ -79,15 +79,55 @@ class Command {
                 {
                     name: `Want more depth?`,
                     value: `You can get explanations of each argument by running \`=help ${this.aliases[0]} <argument>\`.`
-                }
+                },
             ]
         };
         if (argument) { // Argument is optional. If not given, create a normal help page.
             let parameter = this.arg.find(par => par.name == argument);
             if (typeof parameter != "undefined") {
-                // create argument help page
+                helpPage = {
+                    color: 0x3300b5,
+                    title: `${this.main}::${argument} help`,
+                    author: {
+                        name: 'Secnyt',
+                        icon_url: 'https://cdn.discordapp.com/avatars/539505577286434816/bd289c17a1dff59e88df42b73bde2c22.webp',
+                        url: 'https://bit.ly/secnyt-github'
+                    },
+                    description: `Help page for ${this.main}::${argument} command.`,
+                    thumbnail: {
+                        url: 'https://cdn.discordapp.com/avatars/697569067241832652/15233f2bf99ff02ac4598ec37fc0dea0.webp?size=128'
+                    },
+                    timestamp: new Date(),
+                    footer: {
+                        text: 'Pluto Help Page',
+                        icon_url: 'https://cdn.discordapp.com/avatars/697569067241832652/15233f2bf99ff02ac4598ec37fc0dea0.webp?size=128'
+                    },
+                    fields: [
+                        {
+                            name: `${argument} argument`,
+                            value: `Optional: ${parameter.optional ? 'yes' : 'no'}\n${parameter.desc}\nex.${parameter.ex}`
+                        },
+                        {
+                            name: '\u200b',
+                            value: '\u200b',
+                            inline: false,
+                        },
+                        {
+                            name: `Want the full command explanation?`,
+                            value: `You can get an explanation of the root command with \`=help ${this.aliases[0]}\`.`
+                        },
+                    ],
+                };
+            }
+            else {
+                helpPage = defaultPage; // set to default and add error
+                helpPage.fields.unshift({ name: "\u200b", value: `We couldn't find argument \`${argument}\`.` });
             }
         }
+        else {
+            helpPage = defaultPage; // set to default
+        }
+        return helpPage;
     }
 }
 module.exports = Command;

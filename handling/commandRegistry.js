@@ -61,7 +61,7 @@ const commands = {
         }],
         [],
         snatch,
-        'Snatch'
+        'snatch'
     ),
     snatchList: new Command(
         "snatch-list",
@@ -78,7 +78,7 @@ const commands = {
         [],
         [],
         snatches,
-        'Snatch'
+        'snatch'
     ),
     suggest: new Command(
         "suggest",
@@ -94,8 +94,95 @@ const commands = {
         }],
         [],
         [],
-        snatchListHandler,
-        'Suggest'
+        suggest,
+        'suggest'
+    ),
+    suggestList: new Command(
+        "suggest-list",
+        ["queue", "suggestions"],
+        "Opens this server's suggestion queue.",
+        "Brings up the server suggestion list, 10 at a time.",
+        "`=queue 2`",
+        [{
+            name: "page",
+            optional: true,
+            desc: "Page number to open.",
+            ex: "`=queue 2`"
+        }],
+        [],
+        [],
+        suggests,
+        'suggest'
+    ),
+    suggestRemove: new Command(
+        "suggest-remove",
+        ["suggestremove", "sgr"],
+        "Removes a suggestion from queue.",
+        "Deletes the suggestion from the server's suggestion queue at the requested index.",
+        "`=sgr 7`",
+        [{
+            name: "index",
+            optional: false,
+            desc: "Index of suggestion to remove",
+            ex: "`=sgr 3`"
+        }],
+        [{
+            permission: 'MANAGE_GUILD',
+            error: 'You don\'t have the "Manage Server" permission.'
+        }],
+        [],
+        suggestRemove,
+        'suggest'
+    ),
+    translate: new Command(
+        "translate",
+        ["translate", "tr"],
+        "Translates a word or phrase.",
+        "Translates a phrase from the inferred language to the specified language.",
+        "`=tr hola : en`",
+        [
+            {
+                name: "phrase",
+                optional: false,
+                desc: "Phrase to be translated.",
+                ex: "`=tr THIS ONE : es`"
+            },
+            {
+                name: "language",
+                optional: true,
+                desc: "Language to be translated to. (Note: Defaults to `en`.) CASE SENSITIVE",
+                ex: "`=tr good morning : zh-CN`"
+            }
+        ],
+        [],
+        [],
+        translate,
+        'misc'
+    ),
+    lyrics: new Command(
+        "lyrics",
+        ["lyrics", "lyric"],
+        "Returns the lyrics of a song.",
+        "Opens the lyrics for a specific song translated into the given language.",
+        "`=lyrics darude sandstorm | it`",
+        [
+            {
+                name: "title",
+                optional: false,
+                desc: "Title of the requested song.",
+                ex: "`=lyrics Lake Washington Boulevard | en`"
+            },
+            {
+                name: "language",
+                optional: true,
+                desc: "Language to be translated to. (Note: If omitted, ) CASE SENSITIVE",
+                ex: "`=tr good morning : zh-CN`"
+            }
+        ],
+        [],
+        [],
+        lyrics,
+        'misc'
     ),
 }
 
