@@ -40,14 +40,11 @@ snh.handle = function(msg, client){
         switch(command){ // checks to see which function the user wants to use
             case "create":
             case "add":
-                var snatch = pon.compile(parameters[2], "vanilla"); // compiles the PlutoObjectNotation
+                var snatch = parameters[2]; // compiles the PlutoObjectNotation
                 if(!parameters[2]){ // if the user didn't specify a snatch parameter
                     msg.channel.send("You are missing the snatch parameter! Make sure you are separating with a semicolon (;)");
                 }
-                else if(!parameters[2].trim().startsWith("s(\"") || !parameters[2].trim().endsWith("\")")){ // if the user didn't use PlutoObjectNotation<String>
-                    msg.channel.send("Your `snatch` parameter must be in PlutoObjectNotation<String> form. ex. `s(\"ABC 123.\")`");
-                }
-                else if(!snatch){ // if the user had an empty PlutoObjectNotation and/or PlutoObjectNotation included forbidden characters.
+                else if(!snatch.trim()){ // if the user had an empty PlutoObjectNotation and/or PlutoObjectNotation included forbidden characters.
                     msg.channel.send("You can't create an empty snatch, or snatches with \"s!");
                 } else { // syntax = good
 

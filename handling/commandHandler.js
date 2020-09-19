@@ -1,7 +1,4 @@
 // Importing
-var mehi = ('bot');
-var jellen = ('super cool and epic, the most of them out of every single living thing ever');
-
 const package = require('../package.json');
 const snh = require('./commands/snatch/snatchHandler.js');
 const embeds = require('../storage/constants/embeds.js');
@@ -14,10 +11,32 @@ const Discord = require('discord.js');
 const soh = require('./../server specific options stuff/serverOptionsHandler.js');
 const pon = require('./commands/PlutoObjectNotation/plutoObjectNotation.js');
 const snqh = require('./commands/snatch/snatchesHandler');
+const trh = require('./commands/translate+songs/translateHandler');
+const lyrh = require('./commands/translate+songs/lyricsHandler');
 
 var ch = {};
 
-ch.handleP = function (msg, client) {
+
+class Command {
+
+    constructor(main, alias, desc, use, arg, flag, perm, func){
+        this.main = main;
+        this.alias = alias;
+        this.desc = desc;
+        this.use = use;
+        this.arg = arg;
+        this.flag = flag;
+        this.perm = perm;
+        this.func = func;
+    }
+    handle = () => {
+        
+    }
+
+}
+
+
+ch.handleP = async function (msg, client) {
     // remove prefix
     let command = msg.content.split(package.prefix)[1];
     // separate arguments
@@ -67,7 +86,16 @@ ch.handleP = function (msg, client) {
             msg.channel.send(pon.compile(msg, "msg"));
             break;
         case "support":
-            msg.channel.send("Come join us at the Official Pluto Support Server! (OPSS)\nhttps://bit.ly/join-pluto-support")
+            msg.channel.send("Come join us at the Official Pluto Support Server! (OPSS)\nhttps://bit.ly/join-pluto-support");
+            break;
+        case "tr":
+        case "translate":
+        case "trans":
+            trh.handle(msg).then(res => { msg.channel.send(res) });
+            break;
+        case "lyrics":
+            lyrh.handle(msg);
+            break;
     }
 }
 ch.handleS = async function (msg, client) {

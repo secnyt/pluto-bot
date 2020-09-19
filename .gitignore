@@ -116,3 +116,5 @@ dist
 /server specific options stuff/serverOptions.json
 /misc/jellenHandling.js
 /misc/secnytHandling.js
+/tsconfig.json
+/handling/.babelrc
