@@ -40,11 +40,26 @@ snh.handle = function(msg, client){
         switch(command){ // checks to see which function the user wants to use
             case "create":
             case "add":
+<<<<<<< Updated upstream
                 var snatch = parameters[2]; // compiles the PlutoObjectNotation
                 if(!parameters[2]){ // if the user didn't specify a snatch parameter
                     msg.channel.send("You are missing the snatch parameter! Make sure you are separating with a semicolon (;)");
                 }
                 else if(!snatch.trim()){ // if the user had an empty PlutoObjectNotation and/or PlutoObjectNotation included forbidden characters.
+=======
+                var snatch = pon.compile(parameters[2], "vanilla"); // compiles the PlutoObjectNotation
+                if(snatch.length > 200){
+                    msg.channel.send("Sorry, but there is a 200 character limit for snatches! Please try to keep your character count low.\nThanks!")
+                    return null;
+                }
+                if(!parameters[2]){ // if the user didn't specify a snatch parameter
+                    msg.channel.send("You are missing the snatch parameter! Make sure you are separating with a semicolon (;)");
+                }
+                else if(!parameters[2].trim().startsWith("s(\"") || !parameters[2].trim().endsWith("\")")){ // if the user didn't use PlutoObjectNotation<String>
+                    msg.channel.send("Your `snatch` parameter must be in PlutoObjectNotation<String> form. ex. `s(\"ABC 123.\")` You may be getting this error if semicolons were put in your snatch, please avoid them!");
+                }
+                else if(!snatch){ // if the user had an empty PlutoObjectNotation and/or PlutoObjectNotation included forbidden characters.
+>>>>>>> Stashed changes
                     msg.channel.send("You can't create an empty snatch, or snatches with \"s!");
                 } else { // syntax = good
 
@@ -87,7 +102,7 @@ snh.handle = function(msg, client){
                                     });
                                 }
                             } else if(snatchExists){ // no overwrite flag, but exists => no insert
-                                msg.channel.send('A snatch with this key exists. Please specify in a flag whether you would like to overwrite.')
+                                msg.channel.send('A snatch with this key exists. Please specify in a flag (`.o`) whether you would like to overwrite.')
                             } else { // no overwrite flag, but doesn't exist => insert
                                 dbo.collection(gid).insertOne(ins, (err, res) => {
                                     if(err) throw err;
@@ -144,7 +159,7 @@ snh.handle = function(msg, client){
                 break;
             case "help":
                 try {
-                    msg.channel.send(`Use the syntax \`${package.prefix}s create; Key; s("Snatch Data")\` to create a snatch.\nUse the syntax \`${package.prefix}s snatch; Key\` to get data from an existing snatch.\nFor further info, please see the official snatch documentation.`)
+                    msg.channel.send(`Use the syntax \`/s create; Key; s("Snatch Data")\` to create a snatch.\nUse the syntax \`/s snatch; Key\` to get data from an existing snatch.\nFor further info, please see the official snatch documentation.`)
                 } catch (err) {
                     msg.channel.send(`Something went wrong.`);
                 }
