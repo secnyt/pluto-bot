@@ -37,12 +37,22 @@ class Command {
 
         return formattedArgs;
     }
+    formattedAlias() { // returns each argument on a new line
+        let formattedAls: string = '';
+        for(let i in this.aliases){
+            let alias = this.aliases[i];
+            formattedAls += (alias + '\n'); // adds name of argument and moves down a line
+        }
+        formattedAls = formattedAls.trim(); // removes ultimate linebreak (unnecessary)
+
+        return formattedAls;
+    }
 
     createHelp(argument?: string){
         let helpPage: any;
         let defaultPage: object = { // the default help page if specifications lead nowhere
             color: 0x32a891,
-            title: this.main + 'help',
+            title: this.main,
             author: {
                 name: 'Secnyt',
                 icon_url: 'https://cdn.discordapp.com/avatars/539505577286434816/bd289c17a1dff59e88df42b73bde2c22.webp',
@@ -64,6 +74,10 @@ class Command {
                     value: this.description
                 },
                 {
+                    name: `aliases`,
+                    value: this.formattedAlias()
+                },
+                {
                     name:  `arguments`,
                     value: this.formattedArguments()
                 },
@@ -83,13 +97,13 @@ class Command {
             if(typeof parameter != "undefined"){
                 helpPage = { // create argument help page
                     color: 0x3300b5,
-                    title: `${this.main}::${argument} help`,
+                    title: `\`${argument}\` arg for \`${this.main}\``,
                     author: {
                         name: 'Secnyt',
                         icon_url: 'https://cdn.discordapp.com/avatars/539505577286434816/bd289c17a1dff59e88df42b73bde2c22.webp',
                         url: 'https://bit.ly/secnyt-github'
                     },
-                    description: `Help page for ${this.main}::${argument} command.`,
+                    description: `Help page for \`${this.main}\`'s \`${argument}\` argument.`,
                     thumbnail: {
                         url: 'https://cdn.discordapp.com/avatars/697569067241832652/15233f2bf99ff02ac4598ec37fc0dea0.webp?size=128'
                     },

@@ -35,11 +35,8 @@ client.on('message', msg => {
         if(!msg.author.bot){
             // if the message starts with the prefix
             if(msg.content.startsWith(package.prefix)){
-                ch.handleP(msg, client);
+                ch.handle(msg, client);
                 
-            }
-            if(msg.content.startsWith("/")){
-                ch.handleS(msg, client);
             }
         }
     }

@@ -1,11 +1,12 @@
-import helpHandler from './commands/helpHandler';
-import snatchHandler from './commands/snatch/snatchHandler';
-import snatchListHandler from './commands/snatch/snatchesHandler';
-import suggestHandler from './commands/suggest/suggestHandler';
-import suggestListHandler from './commands/suggest/queueHandler';
-import suggestRemoveHandler from './commands/suggest/suggestRemove';
-import translateHandler from './commands/translate+songs/translateHandler';
-import lyricsHandler from './commands/translate+songs/lyricsHandler';
+let helpHandler = require('./commands/helpHandler');
+let snatchHandler = require('./commands/snatch/snatchHandler');
+let snatchListHandler = require('./commands/snatch/snatchesHandler');
+let suggestHandler = require('./commands/suggest/suggestHandler');
+let suggestListHandler = require('./commands/suggest/queueHandler');
+let suggestRemoveHandler = require('./commands/suggest/suggestRemove');
+let translateHandler = require('./commands/translate+songs/translateHandler');
+let lyricsHandler = require('./commands/translate+songs/lyricsHandler');
+let Command = require('./command.class');
 
 var help = (msg, client, opt) => { helpHandler.handle(msg, client, opt); };
 var snatch = (msg, client, opt) => { snatchHandler.handle(msg, client, opt); };
@@ -16,8 +17,8 @@ var suggestRemove = (msg, client, opt) => { suggestRemoveHandler.handle(msg, cli
 var translate = (msg, client, opt) => { translateHandler.handle(msg, client, opt); };
 var lyrics = (msg, client, opt) => { lyricsHandler.handle(msg, client, opt); };
 
-const commands = {
-    help: new Command(
+const commands = [
+    new Command(
         "help", 
         ["help", "wtf", "pluto"], 
         "Opens the Pluto Help Page.",
@@ -42,7 +43,7 @@ const commands = {
         help,
         'Pluto'
     ),
-    snatch: new Command(
+    new Command(
         "snatch",
         ["sn", "snatch"],
         "Used to work with snatches.",
@@ -63,7 +64,7 @@ const commands = {
         snatch,
         'snatch'
     ),
-    snatchList: new Command(
+    new Command(
         "snatch-list",
         ["snatches", "sns"],
         "Displays the snatch list for the server.",
@@ -80,7 +81,7 @@ const commands = {
         snatches,
         'snatch'
     ),
-    suggest: new Command(
+    new Command(
         "suggest",
         ["suggest", "sg"],
         "Suggests something to this server's queue.",
@@ -97,7 +98,7 @@ const commands = {
         suggest,
         'suggest'
     ),
-    suggestList: new Command(
+    new Command(
         "suggest-list",
         ["queue", "suggestions"],
         "Opens this server's suggestion queue.",
@@ -114,7 +115,7 @@ const commands = {
         suggests,
         'suggest'
     ),
-    suggestRemove: new Command(
+    new Command(
         "suggest-remove",
         ["suggestremove", "sgr"],
         "Removes a suggestion from queue.",
@@ -134,7 +135,7 @@ const commands = {
         suggestRemove,
         'suggest'
     ),
-    translate: new Command(
+    new Command(
         "translate",
         ["translate", "tr"],
         "Translates a word or phrase.",
@@ -159,7 +160,7 @@ const commands = {
         translate,
         'misc'
     ),
-    lyrics: new Command(
+    new Command(
         "lyrics",
         ["lyrics", "lyric"],
         "Returns the lyrics of a song.",
@@ -184,6 +185,6 @@ const commands = {
         lyrics,
         'misc'
     ),
-}
+]
 
 module.exports = commands
