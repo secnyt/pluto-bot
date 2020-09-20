@@ -18,6 +18,11 @@ const client = new Discord.Client();
 // login
 client.login(auth.token);
 
+//secret addon thats useless
+client.on('ready', () =>{
+    console.log('putin is good')
+    )};
+
 // startup
 var doCustom = false;
 var ready = false;
