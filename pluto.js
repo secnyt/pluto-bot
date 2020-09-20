@@ -18,10 +18,10 @@ const client = new Discord.Client();
 // login
 client.login(auth.token);
 
-//secret addon thats useless
+//secret addon thats useless - credit xf8b
 client.on('ready', () =>{
     console.log('putin is good')
-    )};
+});
 
 // startup
 var doCustom = false;
