@@ -16,7 +16,7 @@ Get a snatch with
 
 ## Flags
 
-### Flags on Snatching
+### Flags on Retrieval
 
 Snatching flags include:
 
@@ -29,7 +29,11 @@ Delete the command request.
 Usage:
 > `=snatch get; hello; .d`
 
-*Deletes the snatch request message*
+Result:
+
+> Pluto \[Bot\]: \<snatch content\>  
+
+*Deletes the snatch request message*  
 
 #### DM
 
@@ -40,7 +44,11 @@ DM the value to the user.
 Usage:
 > `=snatch get; hello; .D`
 
+Result:
+
 *DMs to user*
+
+> Pluto \[Bot\]: \<snatch content\>  
 
 ### Flags on Creation of Snatches
 
