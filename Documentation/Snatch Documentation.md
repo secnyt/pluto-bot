@@ -6,7 +6,7 @@ Usage: `=snatch <action>; [name of snatch]; [flags or the snatch content]; [flag
 
 Each server has its own snatches, each with their own keywords.
 
-(<> signifies mandatory parameters, [] signifies optional parameters.)
+(<> signifies mandatory parameters, \[\] signifies optional parameters.)
 
 Create a snatch with
 `=snatch create; <name of snatch>; <content>; [flags]`
@@ -18,7 +18,7 @@ Get a snatch with
 
 ### Flags on Retrieval
 
-Snatching flags include:
+Retrieval flags include:
 
 #### Delete
 
