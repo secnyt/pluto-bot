@@ -1,18 +1,12 @@
 # pluto-bot
 
-A government and ease-of-use bot.
+**An easy to use inclusivity bot for Discord.**
 
+Powered by Node.js and Discord.js.
 
-### What you need: 
+Programmed in JavaScript and TypeScript.
 
-    auth.json
-        "token" value
-
-    node_modules
-        "discord.js" module
-        "svg-captcha" module
-        "convert-svg-to-png" module
-        "canvas" module
+Data stored using MongoDB.
 
 
 Made by Secnyt
