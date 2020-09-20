@@ -6,7 +6,7 @@ var write = function(data){
     fs.writeFileSync('./storage/suggestions/suggestions.json', JSON.stringify(data, null, 4));
 }
 
-sgr.remove = (msg, client) => {
+sgr.handle = (msg, client) => {
     if(msg.member.hasPermission('MANAGE_GUILD')){
         sgs = JSON.parse(fs.readFileSync('./storage/suggestions/suggestions.json'));
         try{

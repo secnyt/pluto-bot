@@ -46,6 +46,8 @@ snh.handle = function(msg, client){
                 }
                 else if(!snatch.trim()){ 
                     msg.channel.send("You can't create an empty snatch!");
+                } else if(snatch.length > 200){
+                    msg.channel.send("please limit your snatch length to below 200 characters.")
                 } else { // syntax = good
 
                     MongoClient.connect(url, (err, db) => { // connect to DB

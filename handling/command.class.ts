@@ -39,12 +39,12 @@ class Command {
     }
     formattedAlias() { // returns each argument on a new line
         let formattedAls: string = '';
-        for(let i in this.aliases){
-            let alias = this.aliases[i];
+        for(let i of this.aliases){
+            let alias = i;
             formattedAls += (alias + '\n'); // adds name of argument and moves down a line
         }
         formattedAls = formattedAls.trim(); // removes ultimate linebreak (unnecessary)
-
+        console.log(formattedAls);
         return formattedAls;
     }
 

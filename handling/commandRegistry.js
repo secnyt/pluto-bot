@@ -14,8 +14,8 @@ var snatches = (msg, client, opt) => { snatchListHandler.handle(msg, client, opt
 var suggest = (msg, client, opt) => { suggestHandler.handle(msg, client, opt); };
 var suggests = (msg, client, opt) => { suggestListHandler.handle(msg, client, opt); };
 var suggestRemove = (msg, client, opt) => { suggestRemoveHandler.handle(msg, client, opt); };
-var translate = (msg, client, opt) => { translateHandler.handle(msg, client, opt); };
-var lyrics = (msg, client, opt) => { lyricsHandler.handle(msg, client, opt); };
+var translate = async (msg, client, opt) => { translateHandler.handle(msg, client, opt); };
+var lyrics = async (msg, client, opt) => { lyricsHandler.handle(msg, client, opt); };
 
 const commands = [
     new Command(
@@ -54,11 +54,17 @@ const commands = [
             optional: false,
             desc: "The specific function to be run.",
             ex: "`=sn CREATE; key name; value string; ..overwrite`"
+        },
+        {
+            name: "key",
+            optional: true,
+            desc: "The key of the snatch being created and/or retrieved.",
+            ex: "`=sn get; KEY NAME; value string; ..delete`"
         }],
         [{
             name: "overwrite",
             optional: true,
-            desc: ""
+            desc: "Overwrites current snatch with the key on creation."
         }],
         [],
         snatch,

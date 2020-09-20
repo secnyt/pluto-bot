@@ -11,16 +11,21 @@ helpHandler.handle = (msg, client) => {
     let getFields = () => {
         let fields = {};
         types.forEach((v, i) => {
-            fields[v] = { name: v };
+            fields[v] = { name: v, value: '' };
         });
         console.log(fields);
         names.forEach((v, i) => {
-            if (fields[v[0]].value) {
-                fields[v[0]].value = v[1][0];
+            let name = v[0];
+            let value = v[1][0];
+            let field = fields[name];
+            if (!field.value) {
+                field.value += value;
             }
             else {
-                fields[v[0]].value += `, ${v[1][0]}`;
+                field.value += (`, ` + value);
+                console.log(field.value);
             }
+            fields[name] = field;
         });
         return Object.keys(fields).map((key) => fields[key]);
     };
