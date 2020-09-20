@@ -150,7 +150,7 @@ snh.handle = function(msg, client){
                 break;
             case "help":
                 try {
-                    msg.channel.send(`Use the syntax \`/s create; Key; s("Snatch Data")\` to create a snatch.\nUse the syntax \`/s snatch; Key\` to get data from an existing snatch.\nFor further info, please see the official snatch documentation.`)
+                    msg.channel.send(`Please go to the official snatch documentation at https://github.com/secnyt/pluto-bot/blob/master/Documentation/Snatch%20Documentation.md`)
                 } catch (err) {
                     msg.channel.send(`Something went wrong.`);
                 }
