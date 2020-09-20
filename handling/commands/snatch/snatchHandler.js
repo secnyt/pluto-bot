@@ -150,7 +150,7 @@ snh.handle = function(msg, client){
                 break;
             case "help":
                 try {
-                    msg.channel.send(`Please go to the official snatch documentation at https://github.com/secnyt/pluto-bot/blob/master/Documentation/Snatch%20Documentation.md`)
+                    msg.channel.send(`Please go to the official snatch documentation at https://github.com/secnyt/pluto-bot/blob/master/Documentation/Snatch%20Documentation.md.`)
                 } catch (err) {
                     msg.channel.send(`Something went wrong.`);
                 }
