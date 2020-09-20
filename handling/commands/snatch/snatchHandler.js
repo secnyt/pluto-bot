@@ -119,7 +119,11 @@ snh.handle = function(msg, client){
 
                         dbo.collection(gid).find(get).toArray((err, res) => { // find query and return array
                             try {
-                                res = res[0].snatch; // find first match and get the snatch value
+                                if(res[0]){
+                                    res = res[0].snatch; // find first match and get the snatch value
+                                } else {
+                                    msg.channel.send('something went wrong')
+                                }
                                 if(err){
                                     console.error(err);
                                     msg.channel.send(`This snatch does (most likely) not exist. If you believe this was in error, please join the support server for help. (\`${require('./../../../package.json').prefix}support\`)`);
