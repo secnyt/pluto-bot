@@ -1,6 +1,6 @@
 # Snatch Documentation
 
-The `snatch` commands is a quick and easy way to get copypastas. 
+The `snatch` command is a quick and easy way to get copypastas. 
 
 Usage: `=snatch <action>; [name of snatch]; [flags or the snatch content]; [flags]`
 
@@ -8,11 +8,9 @@ Each server has its own snatches, each with their own keywords.
 
 (<> signifies mandatory parameters, \[\] signifies optional parameters.)
 
-Create a snatch with
-`=snatch create; <name of snatch>; <content>; [flags]`
+Create a snatch with `=snatch create; <name of snatch>; <content>; [flags]`
 
-Get a snatch with
-`=snatch get; <name of snatch>; [flags]`
+Get a snatch with `=snatch get; <name of snatch>; [flags]`
 
 ## Flags
 
