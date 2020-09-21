@@ -11,7 +11,7 @@ snatchHandler.handle = (msg: any, client: any) => {
     let parameters = commandless.split(';', 4).map(p => p.trim()); // split into pieces with maximum of 4 values by ';'
     let flags: any;
     if (typeof parameters[3] != 'undefined') {
-        flags = parameters[3].split(',').map(p => p.toLowerCase().trim()); // get specific flags
+        flags = parameters[3].split(',').map(f => f.toLowerCase().trim()); // get specific flags
     }
 
     let snatchfunction = snatchfunctions.find(c => c.alias.includes(parameters[0])); // specific snatch function
@@ -66,11 +66,11 @@ snatchHandler.create = (msg: any, parameters: Array<string>, flags: Array<string
                 db.close();
             })
         })
-
+        if (flags.includes('.d') || flags.includes('..delete')) msg.delete();
     })
 }
 snatchHandler.get = (msg: any, parameters: Array<string>, flags: Array<string>) => { // code to be run on get
-    
+    flags = parameters[2].split(',').map(f => f.toLowerCase().trim());
 }
 snatchHandler.help = (msg: any, parameters: Array<string>, flags: Array<string>) => { // code to be run on help
     // generate and send help page
