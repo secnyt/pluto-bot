@@ -83,7 +83,7 @@ function setup(){
     ready = true;
 
     // external js
-    ch = require('./handling/commandHandler');
+    ch = require('./handling/command.handler');
     snh = require('./handling/commands/snatch/snatchHandler.js');
     c = require('./captcha/captcha.js');
     pt = require('./misc/piTime.js');
