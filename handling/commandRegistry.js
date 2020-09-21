@@ -6,6 +6,7 @@ let suggestListHandler = require('./commands/suggest/queueHandler');
 let suggestRemoveHandler = require('./commands/suggest/suggestRemove');
 let translateHandler = require('./commands/translate+songs/translateHandler');
 let lyricsHandler = require('./commands/translate+songs/lyricsHandler');
+let supportHandler = require('./commands/support.handler');
 let Command = require('./command.class');
 
 var help = (msg, client, opt) => { helpHandler.handle(msg, client, opt); };
@@ -16,6 +17,8 @@ var suggests = (msg, client, opt) => { suggestListHandler.handle(msg, client, op
 var suggestRemove = (msg, client, opt) => { suggestRemoveHandler.handle(msg, client, opt); };
 var translate = async (msg, client, opt) => { translateHandler.handle(msg, client, opt); };
 var lyrics = async (msg, client, opt) => { lyricsHandler.handle(msg, client, opt); };
+var support = (msg, client, opt) => { supportHandler.support(msg, client, opt); };
+var docs = (msg, client, opt) => { supportHandler.docs(msg, client, opt); };
 
 const commands = [
     new Command(
@@ -190,6 +193,30 @@ const commands = [
         [],
         lyrics,
         'misc'
+    ),
+    new Command(
+        "support",
+        ["support", "supportserver"],
+        "Gives the link to Pluto Support Server.",
+        "Gives the link to Pluto Support Server.",
+        "`=support`",
+        [],
+        [],
+        [],
+        support,
+        'Pluto'
+    ),
+    new Command(
+        "documentation",
+        ["docs", "documentation"],
+        "Gives the link to Documentation on GitHub.",
+        "Gives the link to Documentation on GitHub.",
+        "`=docs`",
+        [],
+        [],
+        [],
+        docs,
+        'Pluto'
     ),
 ]
 

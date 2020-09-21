@@ -3,4 +3,4 @@
 ./handling/commands/help.handler.ts
 ./handling/command.class.ts
 ./handling/command.handler.ts
-
+./handling/commands/support.handler.ts

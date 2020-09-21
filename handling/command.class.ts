@@ -44,7 +44,6 @@ class Command {
             formattedAls += (alias + '\n'); // adds name of argument and moves down a line
         }
         formattedAls = formattedAls.trim(); // removes ultimate linebreak (unnecessary)
-        console.log(formattedAls);
         return formattedAls;
     }
 

@@ -118,3 +118,4 @@ dist
 /handling/commands/help.handler.js
 /handling/commands/snatch/snatch.handler.js
 /handling/commands/snatch/snatchfunction.class.js
+/handling/commands/support.handler.js
