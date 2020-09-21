@@ -109,12 +109,6 @@ dist
 # Stuff I don't need on the internet
 /auth.json
 /storage/suggestions/suggestions.json
-/storage/snatches
-/storage/images
-/captcha
 !/captcha/captcha.js
 /server specific options stuff/serverOptions.json
-/misc/jellenHandling.js
-/misc/secnytHandling.js
 /tsconfig.json
-/handling/.babelrc
