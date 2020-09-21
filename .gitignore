@@ -112,3 +112,10 @@ dist
 !/captcha/captcha.js
 /server specific options stuff/serverOptions.json
 /tsconfig.json
+
+# compiled TypeScript JS files
+/handling/command.class.js
+/handling/command.handler.js
+/handling/commands/help.handler.js
+/handling/commands/snatch/snatch.handler.js
+/handling/commands/snatch/snatchfunction.class.js
