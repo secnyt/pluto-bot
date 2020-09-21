@@ -1,5 +1,5 @@
-let helpHandler = require('./commands/helpHandler');
-let snatchHandler = require('./commands/snatch/snatchHandler');
+let helpHandler = require('./commands/help.handler');
+let snatchHandler = require('./commands/snatch/snatch.handler');
 let snatchListHandler = require('./commands/snatch/snatchesHandler');
 let suggestHandler = require('./commands/suggest/suggestHandler');
 let suggestListHandler = require('./commands/suggest/queueHandler');
@@ -45,7 +45,7 @@ const commands = [
     ),
     new Command(
         "snatch",
-        ["sn", "snatch"],
+        ["snatch", "sn"],
         "Used to work with snatches.",
         "Used to handle creating, editing, and retrieving of snatches in a specific server. Has a different syntax style from other commands.",
         "`=snatch help`",
