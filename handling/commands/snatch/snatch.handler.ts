@@ -41,36 +41,58 @@ snatchHandler.create = (msg: any, parameters: Array<string>, flags: Array<string
         if (err) { console.error(err); msg.channel.send('Something went wrong.'); return; }
         let dbo: any = db.db('pluto-snatches');
         
-        dbo.collection(msg.guild.id).find({ key: parameters[1] }, (err, res) => {
+        dbo.collection(msg.guild.id).find({ key: parameters[1] }).toArray((err, res) => {
             if (err) { console.error(err); msg.channel.send('Something went wrong.'); return; }
-            if ((!flags.includes('.o') || !flags.includes('..overwrite')) && res[0]) { // no overwrite + exists
-                msg.channel.send('This snatch already exists!\nPlease specify the `.o` flag to overwrite.');
-                return;
-            } else if (res[0]) { // overwrite + exists
-                msg.channel.send('Your snatch has been overwritten and updated.');
-            } else { // overwrite or no overwrite + exists
-                msg.channel.send(`Your snatch, \`${parameters[1]}\`, with value \`${parameters[2]}\` has been processed and uploaded.`)
-            }
+
+            if (typeof flags == 'undefined') flags = [];
+
             let ins: any = {
                 key: parameters[1],
                 snatch: parameters[2],
                 reserved: false,
                 permissions: []
             }
-            dbo.collection(msg.guild.id).insertOne(ins, (err: any) => {
-                if (err) {
-                    console.error(err);
-                    msg.channel.send('Something went wrong on the insertion of your snatch into the database.\nPlease join OPSS (`=support`) for help.'); return;
-                }
 
-                db.close();
-            })
-        })
+            if ((!flags.includes('.o') || !flags.includes('..overwrite')) && res[0]) { // no overwrite + exists
+                msg.channel.send('This snatch already exists!\nPlease specify the `.o` flag to overwrite.');
+                return;
+            } else if (res[0]) { // overwrite + exists
+                dbo.collection(msg.guild.id).findOneAndReplace({ key: parameters[1] }, ins, (err: any) => {
+                    if (err) { console.error(err); msg.channel.send('Something went wrong on the insertion of your snatch into the database.\nPlease try again, or join OPSS (`=support`) for help.'); return; }
+                    db.close();
+                })
+                msg.channel.send('Your snatch has been overwritten and updated.');
+                return;
+            } else { // overwrite or no overwrite + exists
+                dbo.collection(msg.guild.id).insertOne(ins, (err: any) => {
+                    if (err) {
+                        console.error(err);
+                        msg.channel.send('Something went wrong on the insertion of your snatch into the database.\nPlease try again, or join OPSS (`=support`) for help.');
+                        return;
+                    }
+                    msg.channel.send(`Your snatch, \`${parameters[1]}\`, with value \`${parameters[2]}\` has been processed and uploaded.`);
+                    db.close();
+                })
+            }
+        })  
         if (flags.includes('.d') || flags.includes('..delete')) msg.delete();
     })
 }
 snatchHandler.get = (msg: any, parameters: Array<string>, flags: Array<string>) => { // code to be run on get
-    flags = parameters[2].split(',').map(f => f.toLowerCase().trim());
+    if (parameters[2]) {
+        flags = parameters[2].split(',').map(f => f.toLowerCase().trim());
+    }
+    MongoClient.connect(url, (err, db) => {
+        if (err) { console.error(err); msg.channel.send('Something went wrong.'); return; }
+        if (!parameters[1]) { msg.channel.send('You need to pass in a key to snatch!\nCheck `=snatches` if you need a key to snatch.'); return; }
+
+        let dbo = db.db('pluto-snatches');
+        dbo.collection(msg.guild.id).find({ key: parameters[1] }).toArray((err, res) => { 
+            if (err) { console.error(err); msg.channel.send('Something went wrong.'); return; }
+            if (!res) { msg.channel.send('This snatch doesn\'t exist! Please make sure you spelled it right.'); return; }
+            msg.channel.send(res[0].snatch);
+        })
+    })
 }
 snatchHandler.help = (msg: any, parameters: Array<string>, flags: Array<string>) => { // code to be run on help
     // generate and send help page
