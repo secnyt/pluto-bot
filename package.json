@@ -1,14 +1,10 @@
 {
     "dependencies": {
         "@vitalets/google-translate-api": "^4.0.0",
-        "canvas": "^2.6.1",
         "discord.js": "^12.2.0",
-        "jsdom": "^16.2.2",
         "mongodb": "^3.6.0",
         "nodemon": "^2.0.4",
-        "solenolyrics": "^5.0.0",
-        "svg-captcha": "^1.4.0",
-        "tinycolor2": "^1.4.1"
+        "solenolyrics": "^5.0.0"
     },
     "nodemonConfig": {
         "ignore": [
