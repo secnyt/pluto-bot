@@ -1,0 +1,6 @@
+./handling/commands/snatch/snatch.handler.ts
+./handling/commands/snatch/snatchfunction.class.ts
+./handling/commands/help.handler.ts
+./handling/command.class.ts
+./handling/command.handler.ts
+
