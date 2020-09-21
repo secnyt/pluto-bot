@@ -1,105 +1,93 @@
-# Snatch #
+# Snatch Documentation
 
-The `snatch` commands is a quick and easy way to get copypastas. 
+The `snatch` command is a quick and easy way to get copypastas. 
 
-Usage: `/s`
+Usage: `=snatch <action>; [name of snatch]; [flags or the snatch content]; [flags]`
 
 Each server has its own snatches, each with their own keywords.
 
-(<> signifies mandatory parameters, [] signifies optional parameters.)
+(<> signifies mandatory parameters, \[\] signifies optional parameters.)
 
-Create a snatch with
-`/s create <keyword> <value>: [flags]`
+Create a snatch with `=snatch create; <name of snatch>; <content>; [flags]`
 
-Get a snatch with
-`/s <keyword> [flags]`
+Get a snatch with `=snatch get; <name of snatch>; [flags]`
 
-## Flags ##
+## Flags
 
-### Flags on Snatching
+### Flags on Retrieval
 
-Snatching flags include
+Retrieval flags include:
+
+#### Delete
 
 >  `.d`
 
 Delete the command request.
 
 Usage:
-> `/s hello .d`
+> `=snatch get; hello; .d`
 
-*Deletes previous message*
+Result:
 
-Example output:
-> `Hi, how are you?`
+> Pluto \[Bot\]: \<snatch content\>  
 
-# #
+*Deletes the snatch request message*  
+
+#### DM
 
 > `.D`
 
 DM the value to the user.
 
 Usage:
-> `/s hello .D`
+> `=snatch get; hello; .D`
+
+Result:
 
 *DMs to user*
 
-Example output:
-> `Hi, how are you?`
+> Pluto \[Bot\]: \<snatch content\>  
 
 ### Flags on Creation of Snatches
 
-Creating flags include
+Creating flags include:
 
-> `.a`
-
-Makes the created flag only usable by those with admin permissions. (only useable by administrators)
-
-Usage:
-> `/s create hi Hi, how are you?: .a`
-
-Expected output:
-> `Created snatch "hi" with value "Hi, how are you?" for Administrators.`
-
-# #
-
-> `.o`
-
-Overrides a snatch with the same name (if a snatch has the same name).
-
-Usage:
-> `/s create hi Hi, how are you?: .o`
-
-Expected output:
-> `Overwrote snatch "hi" with value "Hi, how are you?".`
-
-# #
-
-> `.c`
-
-Cancels creation of snatch (if a snatch has the same name).
-
-Usage:
-> `/s create hi Hi, how are you?: .c`
-
-Expected output:
-> Snatch "hi" was not created since a snatch with name "hi" already exists.
-
-# #
+#### Owner Only
 
 > `.w`
 
 Makes the created flag only usable by the owner of the server. (only useable by the owner of the server)
 
 Usage:
-> `/s create hi Hi, how are you?: .w`
+> `=snatch create; hi; Hi, how are you?; .w`
 
-Expected output:
-> `Created snatch "hi" with value "Hi, how are you?" for Administrators.`
+#### Administrator Only
 
+> `.a`
 
+Makes the created flag only usable by those with admin permissions. (only useable by administrators)
 
-## Permissions ##
+Usage:
+> `=snatch create; hi; Hi, how are you?; .a`
 
-Snatches can only be created by those with admin permissions. 
+#### Override If Present
 
-They can be used by anyone (unless the `.a` or `.w` flag is used on creation).
+> `.o`
+
+Overrides a snatch with the same name (if a snatch has the same name).
+
+Usage:
+> `=snatch create; hi; Hi, how are you?; .o`
+
+#### Cancel If Present
+
+> `.c`
+
+Cancels creation of snatch (if a snatch has the same name).
+
+Usage:
+> `=snatch create; hi; Hi, how are you?; .c`
+
+## Permissions
+
+Snatches can be created and used by anyone (unless the `.a` or `.w` flag is used on creation).
