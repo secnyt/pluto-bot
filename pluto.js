@@ -40,14 +40,6 @@ client.on('message', msg => {
             }
         }
     }
-    if(msg.channel.id == '697952569405735014' && !msg.author.bot){
-        sch = require('./misc/secnytHandling');
-        sch.handle(msg, client);
-    }
-    if(msg.channel.id == '732666512111960124' && !msg.author.bot){
-        var jlh = require('./misc/jellenHandling');
-        doCustom = jlh.toSpam(msg, client);
-    }
 });
 
 client.on('guildMemberAdd', member => {
@@ -95,14 +87,3 @@ function setup(){
     var guild = client.guilds.cache.get('691793782466674718');
     discArray = Array.from(guild.members.cache);
 }
-
-function abc(){
-    if(doCustom && ready){
-        var jellen = client.users.fetch('702576599295590563', true).then((user) => {
-            user.send('hello').then((sent) => {
-            })
-        })
-    }
-}
-
-setInterval(() => {abc()}, 1000);
