@@ -9,16 +9,13 @@ var write = function(data){
 sgr.handle = (msg, client) => {
     if(msg.member.hasPermission('MANAGE_GUILD')){
         sgs = JSON.parse(fs.readFileSync('./storage/suggestions/suggestions.json'));
-        try{
-            var num = msg.content.split(' ')[1];
-            if(num ){
-                sgs[msg.guild.id].splice(num - 1, 1);
-                msg.channel.send("Deleted suggestion number " + (num));
-                write(sgs);
-            } else {
-                msg.channel.send('You must specify an index (integer) to delete!');
-            }
-        }catch(err){
+        try {
+            msg.content.split(' ').filter(n => Number(n) == n).map(n => parseInt(n, 10)).sort((a, b) => b - a).forEach(num => {
+                    sgs[msg.guild.id].splice(num - 1, 1);
+                    msg.channel.send("Deleted suggestion number " + (num));
+                    write(sgs);
+            });
+        } catch(err) {
             msg.channel.send(`Could not delete suggestion.`);
             console.error(error);
         }
