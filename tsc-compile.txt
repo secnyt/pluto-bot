@@ -4,3 +4,4 @@
 ./handling/command.class.ts
 ./handling/command.handler.ts
 ./handling/commands/support.handler.ts
+./handling/commands/suggest/suggest.handler.ts
