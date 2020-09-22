@@ -121,3 +121,4 @@ dist
 /handling/commands/support.handler.js
 /handling/commands/suggest/suggest.handler.js
 /handling/commands/suggest/suggest.class.js
+/handling/commands/suggest/queue.handler.js

@@ -6,3 +6,4 @@
 ./handling/commands/support.handler.ts
 ./handling/commands/suggest/suggest.handler.ts
 ./handling/commands/suggest/suggest.class.ts
+./handling/commands/suggest/queue.handler.ts
