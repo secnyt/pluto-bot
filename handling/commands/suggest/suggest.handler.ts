@@ -14,7 +14,7 @@ suggestHandler.handle = (msg: any, client: any) => {
 
   var suggestion = new Suggestion(commandless, msg.guild.id, msg.author.id);
 
-  MongoClient.connect(url, (err, db) => {
+  MongoClient.connect(url, (err: any, db: any) => {
     if (err) { msg.channel.send('Something went wrong!'); return; }
 
     let dbo = db.db('pluto-suggestions');
