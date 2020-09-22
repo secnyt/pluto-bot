@@ -69,7 +69,7 @@ class Command {
 
             fields: [
                 {
-                    name: `=${this.aliases[0]}`,
+                    name: this.use,
                     value: this.description
                 },
                 {
