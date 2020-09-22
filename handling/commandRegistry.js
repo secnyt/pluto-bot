@@ -19,6 +19,7 @@ var translate = async (msg, client, opt) => { translateHandler.handle(msg, clien
 var lyrics = async (msg, client, opt) => { lyricsHandler.handle(msg, client, opt); };
 var support = (msg, client, opt) => { supportHandler.support(msg, client, opt); };
 var docs = (msg, client, opt) => { supportHandler.docs(msg, client, opt); };
+var discordjs = (msg, client, opt) => { supportHandler.discordjs(msg, client, opt); };
 
 const commands = [
     new Command(
@@ -216,6 +217,18 @@ const commands = [
         [],
         [],
         docs,
+        'Pluto'
+    ),
+    new Command(
+        "discordjs",
+        ["discordjs", "bestthingonthesurfaceofpluto"],
+        "Gives the link to DiscordJS.",
+        "Gives the link to DiscordJS.",
+        "`=bestthingonthesurfaceofpluto`",
+        [],
+        [],
+        [],
+        discordjs,
         'Pluto'
     ),
 ]
