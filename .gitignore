@@ -120,3 +120,4 @@ dist
 /handling/commands/snatch/snatchfunction.class.js
 /handling/commands/support.handler.js
 /handling/commands/suggest/suggest.handler.js
+/handling/commands/suggest/suggest.class.js
