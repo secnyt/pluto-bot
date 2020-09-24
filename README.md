@@ -3,11 +3,9 @@
 **An easy to use inclusivity bot for Discord.**
 
 
-Powered by Node.js and Discord.js.
-
-Programmed in JavaScript and TypeScript.
-
-Data stored using MongoDB.
+Powered by Node.js and Discord.js.\
+Programmed in JavaScript and TypeScript.\
+Data stored using MongoDB.\
 
 
 # On Use #
@@ -19,13 +17,13 @@ You may get an error. This is normal, and it should've created .js files paired 
 ​
 ​
 ​
-​
 
 Made by Secnyt
 
 ### Open Source Contributors ###
 Thanks to
 
-**xf8b**
+**xf8b**\
+**ag6**
 
 for the amazing contributions! I couldn't thank you more.
