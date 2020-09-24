@@ -5,7 +5,7 @@
 
 Powered by Node.js and Discord.js.\
 Programmed in JavaScript and TypeScript.\
-Data stored using MongoDB.\
+Data stored using MongoDB.
 
 
 # On Use #
@@ -24,6 +24,6 @@ Made by Secnyt
 Thanks to
 
 **xf8b**\
-**ag6**
+**AG6**
 
 for the amazing contributions! I couldn't thank you more.
