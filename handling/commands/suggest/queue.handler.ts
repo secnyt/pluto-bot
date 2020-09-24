@@ -13,15 +13,13 @@ queueHandler.handle = (msg: any, client: any) => {
     let dbo = db.db('pluto-suggestions');
     dbo.collection(msg.guild.id).find({}).toArray((err: any, res: any) => {
       if (err) { msg.channel.send('Something went wrong!'); return; }
-      console.log(res);
       let pages: Array<any> = [];
+
       res.forEach((v: any, i: number) => {
         let page: number = Math.floor(i / 10); // 10 suggestions per page
         if (!pages[page]) pages[page] = '';
         pages[page] += (v.c + '\n');
       })
-
-      console.log(pages);
 
       let getFormattedSuggestions = (num) => {
         return pages[num];
@@ -39,7 +37,7 @@ queueHandler.handle = (msg: any, client: any) => {
         return fields;
       }
 
-      if (!pages[pageNum]) { msg.channel.send(`There are no suggestions at page #${pageNum.toString()}!`); return; }
+      if (!pages[pageNum]) { msg.channel.send(`There are no suggestions at page #${(pageNum + 1).toString()}!`); return; }
       let embed = {
         color: 0xf238d6,
         title: `Suggestion Queue`,

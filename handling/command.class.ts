@@ -9,7 +9,7 @@ class Command {
         private use: string, 
         private arg: Array<any>, 
         private flag: Array<object>, 
-        private perm: Array<string>, 
+        private perm: Array<any>, 
         private func: Function,
         private sect: string
     ){}
@@ -45,6 +45,15 @@ class Command {
         }
         formattedAls = formattedAls.trim(); // removes ultimate linebreak (unnecessary)
         return formattedAls;
+    }
+    formattedPerms() {
+        let formattedPerms: string = '';
+        for (let i of this.perm) {
+            let perm = i.permission;
+            formattedPerms += (perm + '\n');
+        }
+        formattedPerms = formattedPerms.trim();
+        return formattedPerms;
     }
 
     createHelp(argument?: string){

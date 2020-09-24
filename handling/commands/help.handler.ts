@@ -17,7 +17,6 @@ helpHandler.handle = (msg: any, client: any) => {
         types.forEach((v: any, i: number) => {
             fields[v] = { name: v, value: ''};
         })
-        console.log(fields);
         names.forEach((v: any, i: number) => {
             let name = v[0];
             let value = v[1][0];
@@ -26,7 +25,6 @@ helpHandler.handle = (msg: any, client: any) => {
                 field.value += value;
             } else {
                 field.value += (`, ` + value);
-                console.log(field.value);
             }
             fields[name] = field;
         })

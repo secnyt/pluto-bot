@@ -3,7 +3,7 @@ let snatchHandler = require('./commands/snatch/snatch.handler');
 let snatchListHandler = require('./commands/snatch/snatchesHandler');
 let suggestHandler = require('./commands/suggest/suggest.handler');
 let suggestListHandler = require('./commands/suggest/queue.handler');
-let suggestRemoveHandler = require('./commands/suggest/suggestRemove');
+let suggestRemoveHandler = require('./commands/suggest/suggestremove.handler');
 let translateHandler = require('./commands/translate+songs/translateHandler');
 let lyricsHandler = require('./commands/translate+songs/lyricsHandler');
 let supportHandler = require('./commands/support.handler');
@@ -65,12 +65,12 @@ const commands = [
             desc: "The key of the snatch being created and/or retrieved.",
             ex: "`=sn get; KEY NAME; value string; ..delete`"
         }],
+        [],
         [{
             name: "overwrite",
             optional: true,
             desc: "Overwrites current snatch with the key on creation."
         }],
-        [],
         snatch,
         'snatch'
     ),
@@ -110,7 +110,7 @@ const commands = [
     ),
     new Command(
         "suggest-list",
-        ["queue", "suggestions"],
+        ["queue", "suggestions", "q"],
         "Opens this server's suggestion queue.",
         "Brings up the server suggestion list, 10 at a time.",
         "`=queue 2`",
