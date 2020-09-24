@@ -28,7 +28,7 @@ translateHandler.handle = async (msg: any, client: any, opt?: any) => {
       break;
   }
 
-  if (!language) { return; }
+  if (!toLanguage) { return; }
 
   let result: string = '';
   await translate(toTranslate, { to: toLanguage, from: fromLanguage }).then((res) => { result = res.text; });
