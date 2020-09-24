@@ -2,7 +2,7 @@
 
 The `translate` command is a quick way to translate words/phrases into the language you want!
 
-Usage: `=translate <word/phrase> : <language>`
+Usage: `=translate <word/phrase> : [fromLanguage] -> <toLanguage>`
 Example : `=translate hola : english`
 
 For languages see bottom of page.
