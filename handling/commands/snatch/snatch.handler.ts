@@ -69,7 +69,6 @@ snatchHandler.create = (msg: any, parameters: Array<string>, flags: Array<string
                 channel.send('Your snatch has been overwritten and updated.');
                 return;
             } else { // overwrite or no overwrite + exists
-                console.log(res[0].snatch, res[0]);
                 dbo.collection(msg.guild.id).insertOne(ins, (err: any) => {
                     if (err) {
                         console.error(err);
@@ -99,7 +98,7 @@ snatchHandler.get = (msg: any, parameters: Array<string>, flags: Array<string>) 
         let dbo = db.db('pluto-snatches');
         dbo.collection(msg.guild.id).find({ key: parameters[1] }).toArray((err, res) => { 
             if (err) { console.error(err); channel.send('Something went wrong.'); return; }
-            if (!res) { channel.send('This snatch doesn\'t exist! Please make sure you spelled it right.'); return; }
+            if (!res[0]) { channel.send('This snatch doesn\'t exist! Please make sure you spelled it right.'); return; }
             channel.send(res[0].snatch);
         })
     })

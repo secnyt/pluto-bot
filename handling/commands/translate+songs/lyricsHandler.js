@@ -7,7 +7,6 @@ const lyrh = {};
 const languages = require('./languages.js');
 
 lyrh.handle = async (msg) => {
-    console.log('abc');
     var page = 0;
     var gimmeSec = msg.channel.send('This may take a few seconds. \n(If it takes too long, the song may not be supported, or you are using illegal characters.)');
     var song = Buffer.from(msg.content.trim().substr(8, msg.content.trim().indexOf('|') - 8), 'utf-8');
