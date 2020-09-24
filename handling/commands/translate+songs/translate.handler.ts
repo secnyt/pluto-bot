@@ -9,13 +9,12 @@ translateHandler.handle = async (msg: any, client: any, opt?: any) => {
   let parameters: any = commandless.split(':');
   let toTranslate: string = parameters[0];
 
-  if (!parameters[1]) { msg.channel.send(toTranslate); return; }
+  if (!parameters[1]) { parameters[1] = 'en'; }
 
   if (parameters.length > 2) {
     msg.channel.send('You have more than one colon! If your translation includes colons, consider temporarily changing to an em dash. (—)')
     return;
   }
-  if (parameters.length == 0) { msg.channel.send(toTranslate); return; }
 
   let language: any = parameters[1].split('->').map(l => l.trim());
   let toLanguage: string;
