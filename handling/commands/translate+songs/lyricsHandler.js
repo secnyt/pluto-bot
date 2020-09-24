@@ -18,7 +18,7 @@ lyrh.handle = async (msg) => {
         icon: await lyrics.requestIconFor(song)
     };
     var getPages = async function(text){//(':', 'ː')
-        var translatedText = await require('./translateHandler').handle({content: `=tr ${text.trim().replace(/:/g, 'ː')} : ${languages.isSupported(lang) ? lang : 'false'}`});
+        var translatedText = await require('./translate.handler').handle({content: `=tr ${text.trim().replace(/:/g, 'ː')} : ${languages.isSupported(lang) ? lang : 'false'}`});
         var pages = [];
         var lines = translatedText.split('\n');
         lines.forEach((l, i) => {
