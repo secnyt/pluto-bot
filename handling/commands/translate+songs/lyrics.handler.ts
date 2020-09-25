@@ -1,5 +1,6 @@
 const lyrics = require('solenolyrics');
 const translator = require('@vitalets/google-translate-api');
+const languages = require('./languages');
 
 let lyricsHandler: any = {};
 
@@ -79,21 +80,8 @@ lyricsHandler.handle = async (msg: any, client: any, opt?: any) => {
           }
         })
       }
-  
-      if (language) { song.lyrics = await translator(song.lyrics, { to: language }) };
     
       let pages = [];
-      let lines = song.lyrics.split('\n');
-      lines.forEach((l: string, i: number) => {
-        if (typeof l != 'undefined') {
-          let page: number = Math.floor(i / 20);
-          if (pages[page]) {
-            pages[page] += ('\n' + l);
-          } else {
-            pages[page] = l;
-          }
-        }
-      })
   
       let pagenum = 0;
   
@@ -114,13 +102,15 @@ lyricsHandler.handle = async (msg: any, client: any, opt?: any) => {
   
       let react = async (sentmsg) => {
         if (pagenum > 0) {
-          return sentmsg.react('⬅️')
-          .then((sent) => { sent.react('❌'); return sent; })
+          return (await sentmsg).react('⬅️')
+          .then((sent) => { sent.message.react('❌'); return sent.message; })
           .then((sent) => { if (pagenum < pages.length - 1) { sent.react('➡️') } return sent; })
         }
-        return sentmsg.react('❌')
-        .then((sent) => { if (pagenum < pages.length - 1) { sent.react('➡️') } return sent; })
+        return (await sentmsg).react('❌')
+        .then((sent) => { if (pagenum < pages.length - 1) { sent.message.react('➡️') } return sent.message; })
       }
+
+      let lines: any;
 
       let sendlyrics = async () => {
         (await lyricmsg).edit({
@@ -176,8 +166,37 @@ lyricsHandler.handle = async (msg: any, client: any, opt?: any) => {
     
           })
       }
-      sendlyrics();
-      
+
+      if (language && language.trim() && languages.isSupported(language.trim())) { await translator(song.lyrics, { to: language.trim() }).then((res) => {
+        song.lyrics = res.text; })
+        .then(() => {
+          lines = song.lyrics.split('\n');
+          lines.forEach((l: string, i: number) => {
+            if (typeof l != 'undefined') {
+              let page: number = Math.floor(i / 20);
+              if (pages[page]) {
+                pages[page] += ('\n' + l);
+              } else {
+                pages[page] = l;
+              }
+            }
+        }) 
+      }).then(setTimeout(sendlyrics, 200)); // this is horrible solution if blocking, too lazy to think of something else
+    }
+      else { 
+        lines = song.lyrics.split('\n');
+        lines.forEach((l: string, i: number) => {
+          if (typeof l != 'undefined') {
+            let page: number = Math.floor(i / 20);
+            if (pages[page]) {
+              pages[page] += ('\n' + l);
+            } else {
+              pages[page] = l;
+            }
+          }
+        })
+        sendlyrics();
+       }
     })
   })
 }
