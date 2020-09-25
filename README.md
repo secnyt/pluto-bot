@@ -24,6 +24,7 @@ Made by Secnyt
 Thanks to
 
 **xf8b**\
-**AG6**
+**AG6**\
+**MobOmega**
 
 for the amazing contributions! I couldn't thank you more.
