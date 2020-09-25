@@ -9,3 +9,4 @@
 ./handling/commands/suggest/queue.handler.ts
 ./handling/commands/suggest/suggestremove.handler.ts
 ./handling/commands/translate+songs/translate.handler.ts
+./handling/commands/translate+songs/lyrics.handler.ts
