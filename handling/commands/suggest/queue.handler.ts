@@ -51,7 +51,7 @@ queueHandler.handle = (msg: any, client: any) => {
         },
         timestamp: new Date(),
         footer: {
-            text: `Suggestions Page ${pageNum}`,
+            text: `Suggestions Page ${pageNum + 1}`,
             icon_url: 'https://cdn.discordapp.com/avatars/697569067241832652/15233f2bf99ff02ac4598ec37fc0dea0.webp?size=128'
         }, 
         fields: getFields()
