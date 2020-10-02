@@ -5,7 +5,7 @@ let suggestHandler = require('./commands/suggest/suggest.handler');
 let suggestListHandler = require('./commands/suggest/queue.handler');
 let suggestRemoveHandler = require('./commands/suggest/suggestremove.handler');
 let translateHandler = require('./commands/translate+songs/translate.handler');
-let lyricsHandler = require('./commands/translate+songs/lyricsHandler');
+let lyricsHandler = require('./commands/translate+songs/lyrics.handler');
 let supportHandler = require('./commands/support.handler');
 let Command = require('./command.class');
 

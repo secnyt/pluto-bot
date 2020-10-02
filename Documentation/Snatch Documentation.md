@@ -91,3 +91,11 @@ Usage:
 ## Permissions
 
 Snatches can be created and used by anyone (unless the `.a` or `.w` flag is used on creation).
+
+
+
+
+
+**Documentation by xf8b**
+
+

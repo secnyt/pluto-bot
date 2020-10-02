@@ -107,7 +107,7 @@ snatchHandler.get = (msg: any, parameters: Array<string>, flags: Array<string>) 
 }
 snatchHandler.help = (msg: any, parameters: Array<string>, flags: Array<string>) => { // code to be run on help
     // generate and send help page
-    let helpPage = require('./../../commandRegistry').find(c => c.alias.includes('snatch')).createHelp(parameters[1]);
+    let helpPage = require('./../../command.registry').find(c => c.alias.includes('snatch')).createHelp(parameters[1]);
     msg.channel.send({ embed: helpPage });
 };
 

@@ -1,5 +1,5 @@
 let commandHandler: any = {};
-let commands = require('./commandRegistry');
+let commands = require('./command.registry');
 
 commandHandler.handle = (msg: any, client: any, opt?: any) => {
     let content: string = msg.content.trim() + ' '; // gets trimmed message content

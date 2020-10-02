@@ -120,5 +120,6 @@ For languages see bottom of page.
     'yo': 'Yoruba',
     'zu': 'Zulu'
 
-    Author: AG6
+
+**Documentation by AG6**
 

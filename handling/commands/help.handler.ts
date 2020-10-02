@@ -6,7 +6,7 @@ helpHandler.handle = (msg: any, client: any) => {
     let commandless = content.substr(content.indexOf(' ') + 1).trim();
     let parameters = commandless.split(' ');
 
-    let commands = require('./../commandRegistry');
+    let commands = require('./../command.registry');
     let command = commands.find(c => c.alias.includes(parameters[0]));
 
     let helpPage: any;
