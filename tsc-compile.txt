@@ -10,3 +10,5 @@
 ./handling/commands/suggest/suggestremove.handler.ts
 ./handling/commands/translate+songs/translate.handler.ts
 ./handling/commands/translate+songs/lyrics.handler.ts
+./handling/commands/server-management/serveroption.handler.ts
+./handling/commands/server-management/serveroptions.class.ts
