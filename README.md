@@ -25,6 +25,7 @@ Thanks to
 
 **xf8b**\
 **AG6**\
-**MobOmega**
+**MobOmega**\
+**Croustys**
 
 for the amazing contributions! I couldn't thank you more.
