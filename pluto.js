@@ -1,16 +1,13 @@
 // JSONs
-var auth = require('./auth.json');
-var package = require('./package.json');
-
-// external js
-var ch, jh;
+var { token } = require('./auth.json');
+var { prefix } = require('./package.json');
 
 // discord.js setup
 const Discord = require('discord.js');
 const client = new Discord.Client();
 
 // login
-client.login(auth.token);
+client.login(token);
 
 client.on('ready', () => {
     setup();
@@ -18,31 +15,17 @@ client.on('ready', () => {
 
 // on message
 client.on('message', msg => {
-
-    // if bot, don't allow
-    if(msg.channel.type == 'text'){
-        if(!msg.author.bot){
-            // if the message starts with the prefix
-            if(msg.content.startsWith(package.prefix)){
-                ch.handle(msg, client);
-            }
+    if(msg.channel.type == 'text' && !msg.author.bot){ // make sure message is eligible to be read
+        if(msg.content.startsWith(prefix)){
+            require('./handling/command.handler').handle(msg, client);
         }
     }
 });
 
 client.on('guildMemberAdd', member => {
-    jh.handle(client, member);
+    require('./handling/joinHandler.js').handle(client, member);
 });
 
 function setup(){
     console.log(`Logged in as ${client.user.tag}.`);
-
-    package = require('./package.json');
-    auth = require('./auth.json');
-    ready = true;
-
-    // external js
-    ch = require('./handling/command.handler');
-    jh = require('./handling/joinHandler');
-
 }
