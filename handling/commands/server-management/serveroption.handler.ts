@@ -12,7 +12,7 @@ serverOptionsHandler.handle = (msg, client) => {
     let content = msg.content.trim();
     let commandless = content.substr(content.indexOf(' ') + 1).trim();
     let parameters = commandless.split(' ', 3);
-    
+
     if (!msg.member.hasPermission('MANAGE_GUILD')) { msg.channel.send('You do not have the "Manage Server" permission!'); return; }
     var guild = msg.guild.id;
     var channel = msg.channel;
@@ -43,7 +43,7 @@ serverOptionsHandler.handle = (msg, client) => {
 serverOptionsHandler.helpHandle = (commandless: string, client: any, msg: any) => {
 
     let parameter2 = commandless.split(' ', 3)[2];
-    if (!parameter2 || !parameter2.trim()) { 
+    if (!parameter2 || !parameter2.trim()) {
         Mongo.connect(url, (err: any, db: any) => {
             if (err) { console.error(err); msg.channel.send('Something went wrong when accessing database. Please try again, and if the error persists, get help from OPSS at https://bit.ly/join-pluto-support.'); return; }
             let dbo = db.db('pluto-options');
@@ -51,15 +51,32 @@ serverOptionsHandler.helpHandle = (commandless: string, client: any, msg: any) =
                 msg.channel.send({ embed: serverOptionsHandler.gethelp(res[0].guildhelp) })
             })
         })
-    } 
+    }
 }
 
 serverOptionsHandler.welcomeHandle = (commandless: string, client: any, msg: any) => {
-    
+
 }
 
 serverOptionsHandler.menuHandle = (commandless: string, client: any, msg: any) => {
-    
+    var menuEmbed = {
+      color:0x1af061
+      title: "`server` command",
+      description: 'Lets you customize Pluto\'s interaction with your server.',
+      thumbnail: msg.guild.iconURL(),
+      fields: [
+        {
+          name: "`=server help`",
+          value: "Lets you access and configure your custom server help page.\n\u200b"
+        },
+        {
+          name: "`=server welcome`",
+          value: "Lets you modify the custom server welcome message.\n\u200b"
+        }
+      ],
+      footer: '`server` command description page.'
+    }
+    msg.channel.send({embed:menuEmbed});
 }
 
 serverOptionsHandler.gethelp = (guildhelp) => {
