@@ -9,8 +9,6 @@ let serverOptionsHandler: any = {};
 
 serverOptionsHandler.handle = (msg, client) => {
 
-    console.log('handle')
-
     let content = msg.content.trim();
     let commandless = content.substr(content.indexOf(' ') + 1).trim();
     let parameters = commandless.split(' ', 3);
@@ -26,26 +24,23 @@ serverOptionsHandler.handle = (msg, client) => {
             if (!res[0]) {
                 dbo.collection(guild).insertOne( new Server(null, defaultHelp(msg.guild)) );
             }
-        });
-
-        switch (parameters[0]) {
-            case 'help':
-                serverOptionsHandler.helpHandle(commandless, client, msg);
-                break;
-            case 'welcome':
-                serverOptionsHandler.welcomeHandle(commandless, client, msg);
-                break;
-            default:
-                serverOptionsHandler.menuHandle(commandless, client, msg);
-                break;
-        }
+            switch (parameters[0]) {
+                case 'help':
+                    serverOptionsHandler.helpHandle(commandless, client, msg);
+                    break;
+                case 'welcome':
+                    serverOptionsHandler.welcomeHandle(commandless, client, msg);
+                    break;
+                default:
+                    serverOptionsHandler.menuHandle(commandless, client, msg);
+                    break;
+            }
+        })
     })
 
 }
 
 serverOptionsHandler.helpHandle = (commandless: string, client: any, msg: any) => {
-
-    console.log('help')
 
     let parameter2 = commandless.split(' ', 3)[2];
     if (!parameter2 || !parameter2.trim()) { 
