@@ -125,3 +125,5 @@ dist
 /handling/commands/suggest/suggestremove.handler.js
 /handling/commands/translate+songs/translate.handler.js
 /handling/commands/translate+songs/lyrics.handler.js
+/handling/commands/server-management/serveroption.handler.js
+/handling/commands/server-management/serveroptions.class.js
