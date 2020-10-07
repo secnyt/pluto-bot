@@ -26,6 +26,7 @@ Thanks to
 **xf8b**\
 **AG6**\
 **MobOmega**\
-**Croustys**
+**Croustys**\
+**ben-varner**
 
 for the amazing contributions! I couldn't thank you more.
