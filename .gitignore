@@ -108,22 +108,8 @@ dist
 
 # Stuff I don't need on the internet
 /auth.json
-/storage/suggestions/suggestions.json
-/server specific options stuff/serverOptions.json
 /tsconfig.json
 
 # compiled TypeScript JS files
-/handling/command.class.js
-/handling/command.handler.js
-/handling/commands/help.handler.js
-/handling/commands/snatch/snatch.handler.js
-/handling/commands/snatch/snatchfunction.class.js
-/handling/commands/support.handler.js
-/handling/commands/suggest/suggest.handler.js
-/handling/commands/suggest/suggest.class.js
-/handling/commands/suggest/queue.handler.js
-/handling/commands/suggest/suggestremove.handler.js
-/handling/commands/translate+songs/translate.handler.js
-/handling/commands/translate+songs/lyrics.handler.js
-/handling/commands/server-management/serveroption.handler.js
-/handling/commands/server-management/serveroptions.class.js
+reworked-handling/*.js
+reworked-handling/commands/CommandHandler.js
