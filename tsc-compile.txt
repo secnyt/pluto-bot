@@ -1,1 +1,14 @@
-./reworked-handling/commands/CommandHandler.ts
+./handling/commands/snatch/snatch.handler.ts
+./handling/commands/snatch/snatchfunction.class.ts
+./handling/commands/help.handler.ts
+./handling/command.class.ts
+./handling/command.handler.ts
+./handling/commands/support.handler.ts
+./handling/commands/suggest/suggest.handler.ts
+./handling/commands/suggest/suggest.class.ts
+./handling/commands/suggest/queue.handler.ts
+./handling/commands/suggest/suggestremove.handler.ts
+./handling/commands/translate+songs/translate.handler.ts
+./handling/commands/translate+songs/lyrics.handler.ts
+./handling/commands/server-management/serveroption.handler.ts
+./handling/commands/server-management/serveroptions.class.ts
