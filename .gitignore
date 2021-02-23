@@ -111,7 +111,6 @@ dist
 
 # Stuff I don't need on the internet
 /src/main/pluto/auth.json
-/tsconfig.json
 
 build/
 

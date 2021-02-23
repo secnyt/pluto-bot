@@ -1,7 +1,14 @@
 import Command from '../Command'
 import HelpInterface from './interface'
 import HelpHandle from './handle'
+import HelpPage from './lib/page'
 
-const HelpCommand = new Command (HelpInterface, HelpHandle)
+export default class HelpCommand extends Command {
+    constructor () {
+        super(HelpInterface, HelpHandle)
+    }
 
-export default HelpCommand
+    static createHelpPageFromCommand (cmd: Command) {
+
+    }
+}
