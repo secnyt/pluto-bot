@@ -107,9 +107,9 @@ dist
 .tern-port
 
 # Stuff I don't need on the internet
-/auth.json
+/src/main/pluto/auth.json
 /tsconfig.json
 
 # compiled TypeScript JS files
-reworked-handling/*.js
-reworked-handling/commands/CommandHandler.js
+*.js
+*.js.map

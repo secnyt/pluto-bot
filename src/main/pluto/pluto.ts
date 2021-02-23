@@ -15,30 +15,30 @@
  *
  */
 
-// JSONs
-var { token } = require('./auth.json');
-var { prefix } = require('./package.json');
+import * as auth from './auth.json'
+import * as Discord from 'discord.js'
+import MessageHandler from './commands/MessageHandler'
+import registerCommands from './commands/RegisterCommands'
 
-// discord.js setup
-const Discord = require('discord.js');
-const client = new Discord.Client();
+const client = new Discord.Client()
 
 // login
-client.login(token);
+client.login(auth.token)
 
+// ready
 client.on('ready', () => {
-    setup();
-});
+    setup()
+    registerCommands()
+})
 
 // on message
 client.on('message', msg => {
     if(msg.channel.type == 'text' && !msg.author.bot){ // make sure message is eligible to be read
-        if(msg.content.startsWith(prefix)){
-            require('./reworked-handling/CommandHandler').handle(msg);
-        }
+        console.log('pluto')
+        MessageHandler.handle(msg);
     }
-});
+})
 
-function setup(){
-    console.log(`Logged in as ${client.user.tag}.`);
+const setup = () => {
+    console.log(`Logged in as ${client.user.tag}.`)
 }
