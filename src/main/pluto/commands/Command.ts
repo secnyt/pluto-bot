@@ -1,5 +1,5 @@
 import CommandInterface from './CommandInterface'
-import Permission from './permissions/Permission'
+import Permission from '../permissions/Permission'
 import Genre from './Genre'
 
 export default class Command {
