@@ -1,6 +1,9 @@
 # VSCode
 .vscode/
 
+# intellij
+.idea/
+
 # Logs
 logs
 *.log
