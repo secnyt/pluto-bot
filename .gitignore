@@ -110,6 +110,5 @@ dist
 /src/main/pluto/auth.json
 /tsconfig.json
 
-# compiled TypeScript JS files
-*.js
-*.js.map
+build/
+
