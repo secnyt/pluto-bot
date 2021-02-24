@@ -1,4 +1,7 @@
+import FrontPage from "./lib/FrontPage/FrontPage";
+
 export default async function HelpHandle (msg: any) {
-    msg.channel.send('hi')
+    let embed = FrontPage.getFrontHelpPageEmbed()
+    msg.channel.send({ embed: embed })
     return true
 }

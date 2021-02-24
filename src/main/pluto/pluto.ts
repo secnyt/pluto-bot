@@ -15,6 +15,7 @@
  *
  */
 
+// @ts-ignore
 import * as auth from './auth.json'
 import * as Discord from 'discord.js'
 import MessageHandler from './commands/MessageHandler'
@@ -34,8 +35,9 @@ client.on('ready', () => {
 // on message
 client.on('message', msg => {
     if(msg.channel.type == 'text' && !msg.author.bot){ // make sure message is eligible to be read
-        console.log('pluto')
-        MessageHandler.handle(msg);
+        MessageHandler.handle(msg).catch((err) => {
+            msg.channel.send(`There was an error: \`\`\`${ err }\`\`\``)
+        });
     }
 })
 

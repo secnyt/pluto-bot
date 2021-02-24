@@ -1,9 +1,16 @@
+import EmbedInterface from "./EmbedInterface";
+
 export default abstract class AbstractEmbed {
     title: string
     description: string
     color: string | number
-    thumbnail: any
-    
+
+    protected constructor (options: EmbedInterface) {
+        this.title = options.title
+        this.description = options.description
+        this.color = options.color
+    }
+
     getDiscordEmbed () {
         return { 
             embed: this

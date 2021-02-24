@@ -1,9 +1,8 @@
 import Permission from '../../../permissions/Permission'
 import Genre from '../../Genre'
-import AbstractEmbed from '../../../embeds/AbstractEmbed'
-import HelpCommandField from './HelpCommandField.ts'
+import HelpCommandField from './HelpCommandField'
+import FieldEmbed from "../../../embeds/FieldEmbed";
 
-export default class HelpPage extends AbstractEmbed{
-    fields: Field[]
+export default class HelpPage extends FieldEmbed {
     
 }

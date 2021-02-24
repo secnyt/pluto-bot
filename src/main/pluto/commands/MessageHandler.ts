@@ -16,12 +16,12 @@
  */
 
 import Command from './Command'
+// @ts-ignore
 import * as auth from '../auth.json'
 
 export default class MessageHandler { // handler class
     static commands = []
 
-    static getPath (path: string) { return require(`./${path}`) }
     static registerCommand (cmd: Command) { this.commands.push(cmd) }
 
     static checkCommand (content: string): boolean { return content.startsWith(auth.prefix) }
