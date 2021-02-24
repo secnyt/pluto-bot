@@ -29,7 +29,7 @@ client.login(auth.token)
 // ready
 client.on('ready', () => {
     setup()
-    registerCommands()
+    register()
 })
 
 // on message
@@ -43,4 +43,8 @@ client.on('message', msg => {
 
 const setup = () => {
     console.log(`Logged in as ${client.user.tag}.`)
+}
+
+const register () => {
+    registerCommands()
 }
