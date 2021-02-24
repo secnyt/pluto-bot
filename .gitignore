@@ -4,6 +4,9 @@
 # intellij
 .idea/
 
+# repl
+.replit
+
 # Logs
 logs
 *.log
