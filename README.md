@@ -10,7 +10,7 @@ Data stored using MongoDB.
 
 # On Use #
 
-Make an ```auth.json``` file in ```src/main/pluto``` with the following structure:
+Make an ```auth.json``` file with ```npm run setup``` and put in the following info:
 ```
 {
   "token": "BOT TOKEN HERE",
