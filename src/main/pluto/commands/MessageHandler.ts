@@ -28,14 +28,15 @@ export default class MessageHandler { // handler class
 
     // handle message string
     static formatMessage (string: string): string { return string.trim() + ' ' }
-    static extractCommand (string: string): string { return string.substring(1, string.indexOf(' ')) } // command after prefix
+    static extractCommand (string: string): string { return string.substring(auth.prefix.length, string.indexOf(' ')) } // command after prefix
+    static afterCommand (string: string): string { return string.substring(string.indexOf(' ')) }
 
     static async handle (msg: any) {
         let content: string = this.formatMessage(msg.content)
         if (!this.checkCommand(content)) return false
-        let command: string = this.extractCommand(content)
+        let command: string = this.extractCommand(content).toLowerCase()
 
-        let cmd: any = this.commands.find(c => c.name == command) // search in the commands list for a command with the given alias
+        let cmd: any = this.commands.find(c => c.name == command || c.alias.includes(command)) // search in the commands list for a command with the given alias
 
         if (typeof cmd == 'undefined') return false // if the command doesnt exist, just ignore the message
 

@@ -3,10 +3,10 @@ export default class EmbedField {
     content: string
     inline: boolean
 
-    constructor (name?, content?) {
+    constructor (name, content, inline?) {
         this.name = name
         this.content = content
-        this.inline = true
+        this.inline = inline || false
     }
 
     getName () { return this.name }

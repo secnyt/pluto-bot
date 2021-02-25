@@ -37,4 +37,11 @@ export default class Command {
         this.color = options.color
         this.genre = options.genre
     }
+
+    getUse () {
+        return 'Coming soon'
+    }
+    getEx () {
+        return 'Coming soon'
+    }
 }

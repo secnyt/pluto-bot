@@ -1,0 +1,13 @@
+import CommandInterface from '../CommandInterface'
+import Genre from '../Genre'
+
+const EchoInterface = new CommandInterface()
+
+EchoInterface
+    .setName('echo')
+    .setAlias(['repeat'])
+    .setDesc('Echoes what it is given.')
+    .setColor('#4848db')
+    .setGenre(Genre.Fun)
+
+export default EchoInterface

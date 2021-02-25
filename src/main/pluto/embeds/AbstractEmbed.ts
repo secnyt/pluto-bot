@@ -10,10 +10,4 @@ export default abstract class AbstractEmbed {
         this.description = options.description
         this.color = options.color
     }
-
-    getDiscordEmbed () {
-        return { 
-            embed: this
-        }
-    }
 }

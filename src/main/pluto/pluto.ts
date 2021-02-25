@@ -45,6 +45,6 @@ const setup = () => {
     console.log(`Logged in as ${client.user.tag}.`)
 }
 
-const register () => {
+const register = () => {
     registerCommands()
 }
