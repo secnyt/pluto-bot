@@ -33,6 +33,6 @@ export default class MessageHandler { // handler class
     static async handle (msg: any): Promise<boolean> {
         const cmd = checkCommand(msg)
         if (!(cmd instanceof Command)) return false
-        cmd.handle(msg)
+        return cmd.handle(msg)
     }
 }
