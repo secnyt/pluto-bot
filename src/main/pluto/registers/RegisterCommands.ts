@@ -16,16 +16,16 @@
  */
 
 import { readdir } from 'fs'
-import MessageHandler from './MessageHandler'
+import CommandRegistry from "../registries/CommandRegistry";
 
 export default function registerCommands () {
-    readdir(__dirname, { withFileTypes: true }, (err, files) => {
+    readdir(__dirname + '/../commands', { withFileTypes: true }, (err, files) => {
         if (err) files = []
         files
             .filter(dir => dir.isDirectory() && dir.name != 'permissions')
             .map(dir => dir.name)
             .forEach(c => {
-                MessageHandler.registerCommand(new (require(`./${c}/command`).default)())
+                CommandRegistry.register(new (require(__dirname + `\\..\\commands\\${c}\\command`).default)())
             })
     })
 }

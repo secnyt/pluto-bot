@@ -15,8 +15,9 @@
  *
  */
 
-import Permission from '../permissions/Permission'
+import Permission from '../../permissions/Permission'
 import Genre from './Genre'
+import Command from "./Command";
 
 export default class CommandInterface {
     name: string
@@ -26,10 +27,10 @@ export default class CommandInterface {
     color: string
     genre: Genre
 
-    setName (name: string) { this.name = name; return this }
-    setAlias (alias: string[]) { this.alias = alias; return this }
-    setPermissions (perms: Permission[]) { this.permissions = perms; return this }
-    setDesc (desc: string) { this.desc = desc; return this }
-    setColor (color: string) { this.color = color; return this }
-    setGenre (genre: Genre) { this.genre = genre; return this }
+    setName (name: string): CommandInterface { this.name = name; return this }
+    setAlias (alias: string[]): CommandInterface { this.alias = alias; return this }
+    setPermissions (perms: Permission[]): CommandInterface { this.permissions = perms; return this }
+    setDesc (desc: string): CommandInterface { this.desc = desc; return this }
+    setColor (color: string): CommandInterface { this.color = color; return this }
+    setGenre (genre: Genre): CommandInterface { this.genre = genre; return this }
 }

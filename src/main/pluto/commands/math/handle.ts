@@ -1,4 +1,4 @@
-import MessageHandler from "../MessageHandler";
+import MessageHandler from "../../handlers/MessageHandler";
 import * as stringMath from "string-math";
 
 export default async function MathHandle (msg: any) {

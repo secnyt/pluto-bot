@@ -18,8 +18,8 @@
 // @ts-ignore
 import * as auth from './auth.json'
 import * as Discord from 'discord.js'
-import MessageHandler from './commands/MessageHandler'
-import registerCommands from './commands/RegisterCommands'
+import MessageHandler from './handlers/MessageHandler'
+import registerCommands from './registers/RegisterCommands'
 
 const client = new Discord.Client()
 

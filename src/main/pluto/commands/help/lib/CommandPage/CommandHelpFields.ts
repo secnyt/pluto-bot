@@ -1,5 +1,5 @@
 import CommandHelpField from "./CommandHelpField";
-import Command from "../../../Command";
+import Command from "../../../../api/command/Command";
 
 export class DescriptionCommandHelpField extends CommandHelpField {
     constructor (cmd: Command) {

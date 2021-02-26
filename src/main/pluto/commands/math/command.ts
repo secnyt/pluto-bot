@@ -1,8 +1,8 @@
-import Command from '../Command'
+import Command from '../../api/command/Command'
 import MathInterface from './interface'
 import MathHandle from './handle'
 
-export default class EchoCommand extends Command {
+export default class MathCommand extends Command {
     constructor () {
         super(MathInterface, MathHandle)
     }

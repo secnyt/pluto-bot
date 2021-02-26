@@ -1,5 +1,5 @@
-import CommandInterface from '../CommandInterface'
-import Genre from '../Genre'
+import CommandInterface from '../../api/command/CommandInterface'
+import Genre from '../../api/command/Genre'
 
 const HelpInterface = new CommandInterface()
 

@@ -1,9 +1,10 @@
 import FrontPage from "./lib/FrontPage/FrontPage";
-import MessageHandler from "../MessageHandler";
-import Command from "../Command";
+import MessageHandler from "../../handlers/MessageHandler";
+import Command from "../../api/command/Command";
 import CommandHelpPage from "./lib/CommandPage/CommandHelpPage";
+import CommandRegistry from "../../registries/CommandRegistry";
 
-export default async function HelpHandle (msg: any) {
+export default async function HelpHandle (msg: any): Promise<boolean> {
     const content: string = MessageHandler.formatMessage(msg.content)
     const search: string[] = MessageHandler.afterCommand(content).trim().split(' ')
 
@@ -12,7 +13,7 @@ export default async function HelpHandle (msg: any) {
         return true
     }
 
-    const commandToHelp: Command = MessageHandler.commands.find(c => c.name == search[0] || c.alias.includes(search[0])) // finds the searched command
+    const commandToHelp: Command = CommandRegistry.registry.find(c => c.name == search[0] || c.alias.includes(search[0])) // finds the searched command
     if (typeof commandToHelp == "undefined") {
         msg.channel.send('Command not found.')
         return true

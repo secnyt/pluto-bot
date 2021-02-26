@@ -1,4 +1,4 @@
-import Command from '../Command'
+import Command from '../../api/command/Command'
 import EchoInterface from './interface'
 import EchoHandle from './handle'
 

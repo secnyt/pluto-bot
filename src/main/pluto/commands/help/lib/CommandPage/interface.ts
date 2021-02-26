@@ -1,5 +1,5 @@
 import EmbedInterface from "../../../../embeds/EmbedInterface";
-import Command from "../../../Command";
+import Command from "../../../../api/command/Command";
 
 export default class CommandHelpPageInterface extends EmbedInterface {
     constructor (cmd: Command) {

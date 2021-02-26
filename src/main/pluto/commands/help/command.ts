@@ -1,4 +1,4 @@
-import Command from '../Command'
+import Command from '../../api/command/Command'
 import HelpInterface from './interface'
 import HelpHandle from './handle'
 

@@ -1,8 +1,8 @@
 enum Genre {
     Pluto = 'pluto',
-    Translate = 'translate',
     Server = 'server',
     Fun = 'fun',
+    Math = 'math',
 }
 
 export default Genre

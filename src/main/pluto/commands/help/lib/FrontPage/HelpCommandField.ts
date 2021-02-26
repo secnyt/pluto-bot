@@ -1,5 +1,5 @@
 import EmbedField from '../../../../embeds/EmbedField'
-import Command from "../../../Command";
+import Command from "../../../../api/command/Command";
 
 export default class HelpCommandField extends EmbedField {
     cmd: string

@@ -15,31 +15,24 @@
  *
  */
 
-import Command from './Command'
+import Command from '../api/command/Command'
 // @ts-ignore
 import * as auth from '../auth.json'
+import CommandRegistry from "../registries/CommandRegistry";
+import checkCommand from "../utility/checkCommand";
 
 export default class MessageHandler { // handler class
-    static commands = []
 
-    static registerCommand (cmd: Command) { this.commands.push(cmd) }
-
-    static checkCommand (content: string): boolean { return content.startsWith(auth.prefix) }
+    static checkPrefix (content: string): boolean { return content.startsWith(auth.prefix) }
 
     // handle message string
     static formatMessage (string: string): string { return string.trim() + ' ' }
     static extractCommand (string: string): string { return string.substring(auth.prefix.length, string.indexOf(' ')) } // command after prefix
     static afterCommand (string: string): string { return string.substring(string.indexOf(' ')) }
 
-    static async handle (msg: any) {
-        let content: string = this.formatMessage(msg.content)
-        if (!this.checkCommand(content)) return false
-        let command: string = this.extractCommand(content).toLowerCase()
-
-        let cmd: any = this.commands.find(c => c.name == command || c.alias.includes(command)) // search in the commands list for a command with the given alias
-
-        if (typeof cmd == 'undefined') return false // if the command doesnt exist, just ignore the message
-
-        return await cmd.handle(msg) // if the permission check didnt fail, or the command doesnt have perms, run the command, then return the state of the command
+    static async handle (msg: any): Promise<boolean> {
+        const cmd = checkCommand(msg)
+        if (!(cmd instanceof Command)) return false
+        cmd.handle(msg)
     }
 }

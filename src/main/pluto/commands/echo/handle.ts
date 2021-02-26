@@ -1,4 +1,4 @@
-import MessageHandler from "../MessageHandler";
+import MessageHandler from "../../handlers/MessageHandler";
 
 export default async function EchoHandle (msg: any) {
     const content = MessageHandler.formatMessage(msg.content)

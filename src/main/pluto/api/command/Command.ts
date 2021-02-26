@@ -16,7 +16,7 @@
  */
 
 import CommandInterface from './CommandInterface'
-import Permission from '../permissions/Permission'
+import Permission from '../../permissions/Permission'
 import Genre from './Genre'
 
 export default class Command {
@@ -38,10 +38,10 @@ export default class Command {
         this.genre = options.genre
     }
 
-    getUse () {
+    getUse (): string {
         return 'Coming soon'
     }
-    getEx () {
+    getEx (): string {
         return 'Coming soon'
     }
 }
