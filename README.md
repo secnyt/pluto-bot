@@ -10,7 +10,7 @@ Data stored using MongoDB.
 
 # On Use #
 
-Make an ```auth.json``` file in ```src/main/pluto``` with the following structure:
+Make an ```auth.json``` file with ```npm run setup``` and put in the following info:
 ```
 {
   "token": "BOT TOKEN HERE",
@@ -28,7 +28,7 @@ To start the bot, simply run ```npm start```
 # Devs #
 
 You can start a watched compile session with ```tsc --resolveJsonModule -w```. This will update the `build` directory whenever the main `src` directory is modified.
-If you have nodemon, you can have your bot automagically restart on file changes with ```nodemon build/main/pluto/pluto.js```.
+If you have nodemon, you can have your bot automagically restart on file changes with ```npm run dev```.
 
 ​
 ​

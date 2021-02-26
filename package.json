@@ -17,7 +17,8 @@
     "scripts": {
         "start": "node build/main/pluto/pluto.js",
         "compile": "rimraf build && tsc",
-        "dev": "nodemon build/main/pluto/pluto.js"
+        "dev": "nodemon build/main/pluto/pluto.js",
+        "setup": "touch src/main/pluto/auth.json"
     },
     "devDependencies": {
         "nodemon": "^2.0.4",
