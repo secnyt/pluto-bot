@@ -19,8 +19,6 @@
 import * as auth from './auth.json'
 import * as Discord from 'discord.js'
 import registerCommands from './registers/RegisterCommands'
-import {WSEventType} from "discord.js";
-import SlashCommandHandler from "./handlers/SlashCommandHandler";
 
 const c = new Discord.Client()
 
