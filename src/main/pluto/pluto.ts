@@ -19,8 +19,6 @@
 import * as auth from './auth.json'
 import * as Discord from 'discord.js'
 import registerCommands from './registers/RegisterCommands'
-import {WSEventType} from "discord.js";
-import SlashCommandHandler from "./handlers/SlashCommandHandler";
 
 const c = new Discord.Client()
 
@@ -35,19 +33,6 @@ c.on('ready', () => {
 
 c.ws.on(<WSEventType>'INTERACTION_CREATE', async interaction => {
     await SlashCommandHandler.handle(interaction)
-})
-
-client.ws.on(<WSEventType>'INTERACTION_CREATE', async interaction => {
-    SlashCommandHandler.handle(interaction)
-    // @ts-ignore
-    client.api.interactions(interaction.id, interaction.token).callback.post({
-        data: {
-            type: 4,
-            data: {
-                content: interaction.data.options[0].value
-            }
-        }
-    })
 })
 
 const setup = () => {
