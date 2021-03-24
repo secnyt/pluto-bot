@@ -1,6 +1,6 @@
-import MessageHandler from "../handlers/MessageHandler";
-import Command from "../api/command/Command";
-import CommandRegistry from "../registries/CommandRegistry";
+import MessageHandler from "../../../handlers/MessageHandler";
+import Command from "../Command";
+import CommandRegistry from "../../../registries/CommandRegistry";
 
 export default function checkCommand (msg: any): Command | boolean {
     const content = MessageHandler.formatMessage(msg.content)

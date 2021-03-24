@@ -8,12 +8,10 @@ export default class CommandHelpPage extends FieldEmbed {
         fields.push(new DescriptionCommandHelpField(cmd).getField())
         fields.push(new UsageCommandHelpField(cmd).getField())
         fields.push(new ExampleCommandHelpField(cmd).getField())
-        console.log(fields)
         return fields
     }
 
     static getEmbed (cmd) {
-
         return new CommandHelpPage(new CommandHelpPageInterface(cmd), CommandHelpPage.getCommandFields(cmd))
     }
 }

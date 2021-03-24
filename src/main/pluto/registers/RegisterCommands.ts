@@ -17,15 +17,14 @@
 
 import { readdir } from 'fs'
 import CommandRegistry from "../registries/CommandRegistry";
+import * as find from 'findit'
 
-export default function registerCommands () {
-    readdir(__dirname + '/../commands', { withFileTypes: true }, (err, files) => {
-        if (err) files = []
-        files
-            .filter(dir => dir.isDirectory() && dir.name != 'permissions')
-            .map(dir => dir.name)
-            .forEach(c => {
-                CommandRegistry.register(new (require(__dirname + `\\..\\commands\\${c}\\command`).default)())
-            })
+export default async function registerCommands () {
+    const finder = find(__dirname + '/../commands')
+
+    finder.on('file', (file, stat) => {
+        if (file.endsWith('command.js')) {
+            CommandRegistry.register(new (require(file).default))
+        }
     })
 }

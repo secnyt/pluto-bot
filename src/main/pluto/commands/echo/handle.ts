@@ -1,9 +1,11 @@
 import MessageHandler from "../../handlers/MessageHandler";
+import PlutoError from "../../api/error/PlutoError";
 
-export default async function EchoHandle (msg: any) {
-    const content = MessageHandler.formatMessage(msg.content)
-    const echo = MessageHandler.afterCommand(content)
+export default async function EchoHandle (msg: any): Promise<PlutoError> {
+    const content = MessageHandler.formattedAfterCommand(msg.content)
+    msg.channel.send(content).catch(err => {
+        return new PlutoError(true, err)
+    })
 
-    if (typeof echo == "undefined") return true
-    msg.channel.send(echo)
+    return new PlutoError(false)
 }

@@ -3,6 +3,7 @@ enum Genre {
     Server = 'server',
     Fun = 'fun',
     Math = 'math',
+    Music = 'music'
 }
 
 export default Genre

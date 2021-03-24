@@ -1,8 +1,13 @@
 {
     "dependencies": {
+        "complex.js": "^2.0.12",
         "discord.js": "^12.2.0",
+        "findit": "^2.0.0",
+        "fraction.js": "^4.0.13",
         "mongodb": "^3.6.0",
-        "string-math": "^1.2.2"
+        "nerdamer": "^1.1.7",
+        "random": "^2.2.0",
+        "solenolyrics": "^5.0.0"
     },
     "nodemonConfig": {
         "ignore": [
