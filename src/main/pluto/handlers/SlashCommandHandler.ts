@@ -1,12 +1,7 @@
-import CommandRegistry from "../registries/CommandRegistry";
-
 export default class SlashCommandHandler {
-    static async handle (interaction) {
+    static async handle (interaction: any) {
         console.log(interaction)
-        const debug = t => {
-            console.log(t)
-            return t
-        }
-        CommandRegistry.registry.find(c => c.name == interaction.data.name).handle(interaction)
+        console.log(interaction.data)
+        return interaction
     }
 }

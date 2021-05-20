@@ -19,6 +19,9 @@ import CommandInterface from './CommandInterface'
 import Permission from '../../permissions/Permission'
 import Genre from './Genre'
 import Argument from "./argument/Argument";
+import generateUsage from "./utility/generateUsage";
+import generateEx from "./utility/generateEx";
+import TrailingArgument from "./argument/TrailingArgument";
 import PlutoError from "../error/PlutoError";
 
 export default class Command {
@@ -41,4 +44,32 @@ export default class Command {
         this.genre = options.genre
         this.arguments = args
     }
+
+    getUse (): string {
+        return generateUsage(this)
+    }
+    getEx (): string {
+        return generateEx(this)
+    }
+
+    checkArgumentValidity (args: string[], msg): PlutoError {
+        let errorMessage: string[] = []
+
+        // if no args are needed to pass in, then don't error
+        if (!this.arguments[0]) return new PlutoError(false)
+
+        let hasErrored: boolean = false
+        this.arguments.forEach((a, i) => {
+            // if argument is nonexistent but it is not required
+            if (!args[i] && !a.required) return
+            let valid: PlutoError = a.checkValidity(args[i])
+            if (valid.err) {
+                errorMessage.push(`\`\`\`${valid.errorMessage[0]}\`\`\``)
+                hasErrored = true
+            }
+        })
+
+        return new PlutoError(hasErrored, errorMessage)
+    }
+
 }

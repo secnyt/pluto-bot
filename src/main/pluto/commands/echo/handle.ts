@@ -1,13 +1,11 @@
-import c from "../../pluto";
+import MessageHandler from "../../handlers/MessageHandler";
+import PlutoError from "../../api/error/PlutoError";
 
-export default async function EchoHandle (i) {
-    // @ts-ignore
-    c.api.interactions(i.id, i.token).callback.post({
-        data: {
-            type: 4,
-            data: {
-                content: i.data.options[0].value
-            }
-        }
+export default async function EchoHandle (msg: any): Promise<PlutoError> {
+    const content = MessageHandler.formattedAfterCommand(msg.content)
+    msg.channel.send(content).catch(err => {
+        return new PlutoError(true, err)
     })
+
+    return new PlutoError(false)
 }

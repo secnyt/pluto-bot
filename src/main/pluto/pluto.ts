@@ -18,29 +18,48 @@
 // @ts-ignore
 import * as auth from './auth.json'
 import * as Discord from 'discord.js'
+import MessageHandler from './handlers/MessageHandler'
 import registerCommands from './registers/RegisterCommands'
+import {WSEventType} from "discord.js";
+import SlashCommandHandler from "./handlers/SlashCommandHandler";
 
-const c = new Discord.Client()
+const client = new Discord.Client()
 
 // login
-c.login(auth.token)
+client.login(auth.token)
 
 // ready
-c.on('ready', () => {
+client.on('ready', () => {
     setup()
     register()
 })
 
-c.ws.on(<WSEventType>'INTERACTION_CREATE', async interaction => {
-    await SlashCommandHandler.handle(interaction)
+// on message
+client.on('message', msg => {
+    if(msg.channel.type == 'text' && !msg.author.bot){ // make sure message is eligible to be read
+        MessageHandler.handle(msg).catch((err) => {
+            msg.channel.send(`There was an error: \`\`\`${ err }\`\`\``)
+        });
+    }
+})
+
+client.ws.on(<WSEventType>'INTERACTION_CREATE', async interaction => {
+    SlashCommandHandler.handle(interaction)
+    // @ts-ignore
+    client.api.interactions(interaction.id, interaction.token).callback.post({
+        data: {
+            type: 4,
+            data: {
+                content: interaction.data.options[0].value
+            }
+        }
+    })
 })
 
 const setup = () => {
-    console.log(`Logged in as ${c.user.tag}.`)
+    console.log(`Logged in as ${client.user.tag}.`)
 }
 
 const register = () => {
     registerCommands()
 }
-
-export default c
