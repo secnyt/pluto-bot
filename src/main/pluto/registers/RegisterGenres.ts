@@ -15,15 +15,13 @@
  *
  */
 
-import CommandRegistry from "../registries/CommandRegistry";
 import * as find from 'findit'
+import GenreRegistry from "../registries/GenreRegistry";
 
-export default async function registerCommands () {
-    const finder = find(__dirname + '/../commands')
+export default async function registerGenres () {
+    const finder = find(__dirname + '/../api/genre/genres')
 
     finder.on('file', (file, stat) => {
-        if (file.endsWith('command.js')) {
-            CommandRegistry.register(new (require(file).default))
-        }
+        GenreRegistry.register(new (require(file).default))
     })
 }

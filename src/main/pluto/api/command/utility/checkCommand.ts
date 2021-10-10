@@ -7,7 +7,7 @@ export default function checkCommand (msg: any): Command | boolean {
     if (!MessageHandler.checkPrefix(content)) return false
     const command = MessageHandler.extractCommand(content)
 
-    let cmd: any = CommandRegistry.registry.find(c => c.name == command || c.alias.includes(command)) // search in the commands list for a command with the given alias
+    let cmd: any = CommandRegistry.get(command) // search in the commands list for a command with the given alias
 
     if (typeof cmd == 'undefined') return false // if the command doesnt exist, just ignore the message
 

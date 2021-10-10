@@ -16,7 +16,7 @@
  */
 
 import Permission from '../../permissions/Permission'
-import Genre from './Genre'
+import Genre from '../genre/Genre'
 import Command from "./Command";
 
 export default class CommandInterface {

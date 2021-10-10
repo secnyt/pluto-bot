@@ -7,7 +7,8 @@
         "mongodb": "^3.6.0",
         "nerdamer": "^1.1.7",
         "random": "^2.2.0",
-        "solenolyrics": "^5.0.0"
+        "solenolyrics": "^5.0.0",
+        "tsc": "^2.0.3"
     },
     "nodemonConfig": {
         "ignore": [

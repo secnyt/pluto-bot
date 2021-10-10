@@ -17,7 +17,7 @@
 
 import CommandInterface from './CommandInterface'
 import Permission from '../../permissions/Permission'
-import Genre from './Genre'
+import Genre from '../genre/Genre'
 import Argument from "./argument/Argument";
 import generateUsage from "./utility/generateUsage";
 import generateEx from "./utility/generateEx";
@@ -42,7 +42,7 @@ export default class Command {
         this.desc = options.desc
         this.color = options.color
         this.genre = options.genre
-        this.arguments = args
+        this.arguments = args || []
     }
 
     getUse (): string {
