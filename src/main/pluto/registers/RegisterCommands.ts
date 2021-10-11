@@ -1,4 +1,5 @@
 /*  This file is part of Pluto.
+ *  Copyright (C) 2021 Secnyt
  *
  *  Pluto is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -12,7 +13,6 @@
  *
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <https://www.gnu.org/licenses/>.
- *
  */
 
 import CommandRegistry from "../registries/CommandRegistry";
