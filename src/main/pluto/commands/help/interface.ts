@@ -1,13 +1,14 @@
 import CommandInterface from '../../api/command/CommandInterface'
-import Genre from '../../api/command/Genre'
+import Genre from '../../api/genre/Genre'
+import GenreRegistry from "../../registries/GenreRegistry";
 
 const HelpInterface = new CommandInterface()
 
 HelpInterface
     .setName('help')
-    .setAlias(['pluto'])
+    .setAlias(['?'])
     .setDesc('Opens help interface.')
     .setColor('#db4848')
-    .setGenre(Genre.Pluto)
+    .setGenre(GenreRegistry.get('pluto'))
 
 export default HelpInterface

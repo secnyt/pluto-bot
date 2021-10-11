@@ -1,5 +1,6 @@
 import CommandInterface from '../../api/command/CommandInterface'
-import Genre from '../../api/command/Genre'
+import Genre from '../../api/genre/Genre'
+import GenreRegistry from "../../registries/GenreRegistry";
 
 const EchoInterface = new CommandInterface()
 
@@ -8,6 +9,6 @@ EchoInterface
     .setAlias(['repeat'])
     .setDesc('Echoes what it is given.')
     .setColor('#4848db')
-    .setGenre(Genre.Fun)
+    .setGenre(GenreRegistry.get('fun'))
 
 export default EchoInterface

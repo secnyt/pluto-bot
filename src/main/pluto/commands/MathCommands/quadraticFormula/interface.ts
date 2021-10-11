@@ -1,5 +1,6 @@
 import CommandInterface from '../../../api/command/CommandInterface'
-import Genre from '../../../api/command/Genre'
+import Genre from '../../../api/genre/Genre'
+import GenreRegistry from "../../../registries/GenreRegistry";
 
 const QuadraticFormulaInterface = new CommandInterface()
 
@@ -8,6 +9,6 @@ QuadraticFormulaInterface
     .setAlias(['quadformula', 'qf'])
     .setDesc('Takes in 3 number arguments (ℝ) and returns the solutions to the quadratic equation.')
     .setColor('#48db48')
-    .setGenre(Genre.Math)
+    .setGenre(GenreRegistry.get('math'))
 
 export default QuadraticFormulaInterface

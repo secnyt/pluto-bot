@@ -22,6 +22,7 @@ import MessageHandler from './handlers/MessageHandler'
 import registerCommands from './registers/RegisterCommands'
 import {WSEventType} from "discord.js";
 import SlashCommandHandler from "./handlers/SlashCommandHandler";
+import registerGenres from "./registers/RegisterGenres";
 
 const client = new Discord.Client()
 
@@ -38,7 +39,8 @@ client.on('ready', () => {
 client.on('message', msg => {
     if(msg.channel.type == 'text' && !msg.author.bot){ // make sure message is eligible to be read
         MessageHandler.handle(msg).catch((err) => {
-            msg.channel.send(`There was an error: \`\`\`${ err }\`\`\``)
+            console.error(err)
+             msg.channel.send(`There was an error: \`\`\`${ err }\`\`\``)
         });
     }
 })
@@ -62,4 +64,5 @@ const setup = () => {
 
 const register = () => {
     registerCommands()
+    registerGenres()
 }
