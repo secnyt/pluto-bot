@@ -25,6 +25,10 @@ We also have some useful base methods:
 ​
 ​
 
+## Class Fields
+
+​
+
 ## `Command.handle`
 
 This is a function specific to every command. It is the main processing of the command and handles logic, replying, and other functions necessary to the function of the command.
@@ -56,7 +60,7 @@ This is a list of type `string[]`. Every entry is an alternative way to interact
 
 This is a list of type `Permission[]` which includes `Permission`s that a user calling the command must have.
 
-*TODO: this*
+- *TODO: this*
 
 ​
 
@@ -87,6 +91,9 @@ This is a list of type `Argument[]`. Entries in the array are arguments which ca
 `Command.arguments` is used to validate a message when a command is called and to provide examples and usage information for the help menu.
 
 ​
+
+## Class Methods
+
 ​
 
 ## `Command.getUse`
